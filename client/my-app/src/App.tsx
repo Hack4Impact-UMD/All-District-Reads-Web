@@ -15,14 +15,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         Hello world!
-//       </header>
-//     </div>
-//   );
-// }
+const App = () => {
+  return (
+    <div className="App">
+      <header className="App-header">
+        Hello world!
+      </header>
+    </div>
+  );
+}
 
-export default app;
+export default App;
