@@ -3,10 +3,10 @@ import {
   onIdTokenChanged,
   type User,
   type IdTokenResult,
-} from '@firebase/auth';
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import app from '../../config/firebase';
-import { UserType } from '../../types/types';
+} from "@firebase/auth";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import app from "../../config/firebase";
+import { UserType } from "../../types/types";
 
 interface Props {
   children: JSX.Element;
@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }: Props): React.ReactElement => {
   // The loading state is used by RequireAuth/RequireAdminAuth
   const [loading, setLoading] = useState<boolean>(true);
   const providerProps = React.useMemo(() => {
-    return {user, userType, token, loading };
-  }, [user, userType, token, loading])
+    return { user, userType, token, loading };
+  }, [user, userType, token, loading]);
 
   useEffect(() => {
     const auth = getAuth(app);
@@ -54,7 +54,8 @@ export const AuthProvider = ({ children }: Props): React.ReactElement => {
   return (
     <AuthContext.Provider value={providerProps}>
       {children}
-    </AuthContext.Provider>);
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {

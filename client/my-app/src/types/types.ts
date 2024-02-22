@@ -1,1 +1,1 @@
-export type UserType = 'ADRAdmin' |  'ADRStaff' | 'SchoolStaff' | 'Parent'
+export type UserType = "ADRAdmin" | "ADRStaff" | "SchoolStaff" | "Parent";
