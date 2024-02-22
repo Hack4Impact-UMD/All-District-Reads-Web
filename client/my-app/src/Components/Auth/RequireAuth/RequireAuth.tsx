@@ -1,7 +1,7 @@
-import React from 'react';
-import { AuthProvider, useAuth } from '../AuthProvider';
-import styles from './RequireAuth.module.css';
-import { UserType } from '../../../types/types';
+import React from "react";
+import { AuthProvider, useAuth } from "../AuthProvider";
+import styles from "./RequireAuth.module.css";
+import { UserType } from "../../../types/types";
 
 interface Props {
   type: UserType;
@@ -11,11 +11,7 @@ interface Props {
 const RequireAuth: React.FC<Props> = ({ type, children }) => {
   const authContext = useAuth();
   if (authContext.loading) {
-    return (
-      <div className={styles.loadingContainer}>
-        Loading...
-      </div>
-    );
+    return <div className={styles.loadingContainer}>Loading...</div>;
   } else if (authContext.userType !== type) {
     return (
       <div className={styles.loadingContainer}>
