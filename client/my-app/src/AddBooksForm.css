@@ -1,0 +1,48 @@
+.add-books-form input[type="text"],
+.add-books-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* So the width includes padding */
+}
+
+.add-books-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.add-books-form button[type="button"] {
+    /* Styling for 'Add Question' button */
+    background-color: #f0ad4e;
+}
+
+.add-books-form button:hover {
+    opacity: 0.9;
+}
+
+.add-books-form .close {
+    margin-bottom: 20px;
+    /* Give some space between the close button and the form elements */
+    display: inline-block;
+    /* To enable margin-top to work */
+    cursor: pointer;
+}
+
+.add-books-form .question-input {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.add-books-form .question-input input {
+    flex-grow: 1;
+    margin-right: 10px;
+}
