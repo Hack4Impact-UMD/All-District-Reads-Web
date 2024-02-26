@@ -8,4 +8,20 @@ function App() {
   );
 }
 
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+const App = () => {
+  return (
+    <div className="App">
+      <header className="App-header">
+        Hello world!
+      </header>
+    </div>
+  );
+}
+
+
 export default App;
