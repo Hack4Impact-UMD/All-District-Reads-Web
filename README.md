@@ -1,6 +1,8 @@
 # All-District-Reads-Web
 There are two main purposes of building the web version of the app - for the ADR Staff & School Systems Staff.
 
+Database plan - https://docs.google.com/document/d/1xxaeg50WpvHJY1tGQUxQrErSksQY34WdJGlrjivC8uI/edit?usp=sharing 
+
 ## Functionality to implemennt for the ADR Staff
 
 - Add pre and post reading surveys for parents to fill out
