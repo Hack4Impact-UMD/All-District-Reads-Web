@@ -1,12 +1,11 @@
 import {
   getAuth,
   onIdTokenChanged,
-  type User,
   type IdTokenResult,
 } from "@firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import app from "../../config/firebase";
-import { UserType } from "../../types/types";
+import { UserType, User } from "../../types/types";
 
 interface Props {
   children: JSX.Element;
@@ -26,7 +25,7 @@ const AuthContext = createContext<AuthContextType>(null!);
 // See onIdTokenChanged for what events trigger a change.
 export const AuthProvider = ({ children }: Props): React.ReactElement => {
   const [user, setUser] = useState<User | any>(null!);
-  const [userType, setUserType] = useState<User | any>(null);
+  const [userType, setUserType] = useState<User | any>(null!);
   const [token, setToken] = useState<IdTokenResult>(null!);
   // The loading state is used by RequireAuth/RequireAdminAuth
   const [loading, setLoading] = useState<boolean>(true);
@@ -45,7 +44,7 @@ export const AuthProvider = ({ children }: Props): React.ReactElement => {
             setToken(newToken);
           })
           .catch(() => {});
-        // need to set userType once we set up official firebase structure
+        setUserType(user.userType);
       }
       setLoading(false);
     });
