@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getFunctions } from 'firebase/functions';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBH7dOlLD1LQ8HZvRxLq6VdUGwYcSGUYAQ",
@@ -11,5 +12,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
+export const functions = getFunctions(app, 'us-east4');
 export default app;

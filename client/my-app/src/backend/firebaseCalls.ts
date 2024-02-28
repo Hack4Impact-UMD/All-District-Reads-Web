@@ -4,7 +4,9 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import app from "../config/firebase";
+import app, { functions } from "../config/firebase";
+import { httpsCallable } from 'firebase/functions';
+import { User } from "../types/types";
 
 export function authenticateUser(email: string, password: string) {
   return new Promise((resolve, reject) => {
@@ -32,9 +34,24 @@ export function registerUser(email: string, password: string) {
   });
 }
 
-export function sendCreateAccountEmail() {
-  const auth = getAuth(app);
+export function sendCreateAccountEmail(user: User, email: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (user.userType !== 'ADRAdmin' && user.userType !== 'ADRStaff') {
+      reject(new Error("Incorrect user type"));
+    }
+    const sendEmailInvitation = httpsCallable(
+      functions,
+      'updateUserEmail'
+    )
+    sendEmailInvitation(email)
+      .then(() => {
+        resolve();
+      })
+      .catch((error) => {
+        reject(error);
+      })
 
+  })
 }
 
 export async function sendInvitationEmail(email: string) {
