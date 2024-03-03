@@ -139,18 +139,12 @@
     position: relative;
 }
 
-.delete-book,
-.edit-book {
+.edit-book,
+.delete-book {
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: #f44336;
-    opacity: 0.8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 5px 10px;
+    z-index: 10;
 }
 
 .edit-book {
@@ -161,4 +155,39 @@
 .delete-book:hover,
 .edit-book:hover {
     opacity: 1;
+}
+
+.dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+}
+
+.dropbtn {
+    background-color: #f4f4f4;
+    color: black;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:active .dropdown-content {
+    display: block;
 }

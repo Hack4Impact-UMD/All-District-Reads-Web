@@ -15,6 +15,7 @@ const Library: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [activeBook, setActiveBook] = useState<Book | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [showDropdownMenu, setShowDropdownMenu] = useState<number | null>(null);
 
     const addBookToLibrary = () => {
         const newBook: Book = {
@@ -67,15 +68,18 @@ const Library: React.FC = () => {
                 {filteredBooks.map((book) => (
                     <div className="book-card" key={book.id}>
                         <div className="book-image-container">
-                            {book.imageUrl ? (
-                                <img src={book.imageUrl} alt={book.title || 'No title'} />
-                            ) : (
-                                <div className="book-placeholder">No Image Available</div>
-                            )}
+                            {/* Book image or placeholder */}
                         </div>
                         <div className="book-title">{book.title || 'No Title'}</div>
-                        <button className="delete-book" onClick={() => deleteBook(book.id)}>Delete</button>
-                        <button className="edit-book" onClick={() => setActiveBook(book)}>Edit</button>
+                        <div className="dropdown">
+                            <button className="dropbtn" onClick={() => setShowDropdownMenu(showDropdownMenu === book.id ? null : book.id)}>⋮</button>
+                            {showDropdownMenu === book.id && (
+                                <div className="dropdown-content">
+                                    <button onClick={() => setActiveBook(book)}>Edit</button>
+                                    <button onClick={() => deleteBook(book.id)}>Delete</button>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 ))}
             </div>
