@@ -8,18 +8,21 @@ type Book = {
     title: string;
     description?: string;
     questions?: string[];
+    imageUrl?: string;
 };
 
 const Library: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [activeBook, setActiveBook] = useState<Book | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const addBookToLibrary = () => {
         const newBook: Book = {
             id: Date.now(), // Using Date.now() for a more unique id...
-            title: 'Untitled',
+            title: '',
             description: '',
             questions: [],
+            imageUrl: '',
         };
         setBooks([newBook, ...books]);
     };
@@ -33,20 +36,49 @@ const Library: React.FC = () => {
     const handleCloseModal = () => {
         setActiveBook(null);
     };
+    const deleteBook = (id: number) => {
+        setBooks(books.filter(book => book.id !== id));
+    };
+
+
+    const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
 
 
     return (
-        <div>
-            <h1>Library</h1>
+        <div className="library-container">
+            <div className="library-header">
+                <h1>Library</h1>
+                <div className="search-bar-container">
+                    <input
+                        type="text"
+                        placeholder="Search for a book..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="search-bar"
+                    />
+                </div>
+
+            </div>
             <button onClick={addBookToLibrary}>Add a New Book</button>
+
             <h2>Recently Added</h2>
-            <ul>
-                {books.map((book) => (
-                    <li key={book.id} onClick={() => setActiveBook(book)}>
-                        {book.title}
-                    </li>
+            <div className="book-grid">
+                {filteredBooks.map((book) => (
+                    <div className="book-card" key={book.id}>
+                        <div className="book-image-container">
+                            {book.imageUrl ? (
+                                <img src={book.imageUrl} alt={book.title || 'No title'} />
+                            ) : (
+                                <div className="book-placeholder">No Image Available</div>
+                            )}
+                        </div>
+                        <div className="book-title">{book.title || 'No Title'}</div>
+                        <button className="delete-book" onClick={() => deleteBook(book.id)}>Delete</button>
+                        <button className="edit-book" onClick={() => setActiveBook(book)}>Edit</button>
+                    </div>
                 ))}
-            </ul>
+            </div>
             {activeBook && (
                 <div className="modal show-modal">
                     <div className="modal-content">
@@ -59,9 +91,11 @@ const Library: React.FC = () => {
                     </div>
                 </div>
             )}
-
         </div>
     );
 };
+
+
+
 
 export default Library;

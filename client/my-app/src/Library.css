@@ -50,3 +50,115 @@
         opacity: 1;
     }
 }
+
+.library-container {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 10fr));
+    /* adjust minmax for your card size */
+    gap: 20px;
+    /* adjust for your spacing */
+    padding: 20px;
+    background-color: #f4f4f4;
+    /* adjust to match Figma color */
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    /* This creates space between the books */
+    padding: 20px;
+}
+
+.book-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.book-image-container {
+    height: 150px;
+    /* Set this to the desired height */
+    background-color: #f4f4f4;
+    /* Placeholder color if there's no image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.book-image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.book-placeholder {
+    text-align: center;
+    color: #666;
+}
+
+
+/* Style for the play button inside book cards */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 10px;
+    margin-left: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.book-card {
+    position: relative;
+}
+
+.delete-book,
+.edit-book {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #f44336;
+    opacity: 0.8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.edit-book {
+    right: 60px;
+    background-color: #bfc3bf;
+}
+
+.delete-book:hover,
+.edit-book:hover {
+    opacity: 1;
+}
