@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { FirebaseApp, FirebaseOptions, initializeApp, getApp } from 'firebase/app'; 
-import firebaseConfig from "../config/firebase";
+import { FirebaseApp, FirebaseOptions, initializeApp, getApp } from 'firebase/app';
+import firebaseConfig from '../config/firebase'; // Make sure to provide the correct path to your Firebase config
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home';
+//import { useNavigate } from 'react-router-dom';
 
-// Check if Firebase app has already been initialized
+
+// Initialize Firebase app
 let firebaseApp: FirebaseApp;
 try {
   firebaseApp = initializeApp(firebaseConfig as FirebaseOptions);
@@ -15,21 +19,37 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonClicked, setButtonClicked] = useState(false); // State to track if button is clicked
+  const [loginError, setLoginError] = useState(''); // State to store login error message
+  const [currentPage, setCurrentPage] = useState<'home' | 'wrong' | null >(null); // State to track current page
+  //const navigate = useNavigate();
 
   const handleLogin = async () => {
     const auth = getAuth(firebaseApp);
-    setEmail(''); // Reset email field
-    setPassword(''); // Reset password field
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setCurrentPage('home');
       console.log('Login successful:', userCredential.user);
       setButtonClicked(true); // Set buttonClicked to true when button is clicked
-      // Redirect or perform other actions on successful login
-      
+      setLoginError('');
+
     } catch (error:any) {
+        setCurrentPage('wrong');
       console.error('Login error:', error.message);
+      setLoginError('Login error: ' + error.message);
     }
   };
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Router> <Routes><Route path = "/" element = {<Home/>}/></Routes></Router>;
+      case 'wrong':
+        return <div>Login incorrect</div>;
+      default:
+        return null;
+    }
+  }
 
   return (
     <div>
@@ -47,9 +67,13 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
-      {buttonClicked && <p>Login button clicked!</p>} // Render message if button is clicked
+      {loginError && <p>{loginError}</p>}
+      {buttonClicked && <p>Login button clicked!</p>}
+      {renderPage()}
     </div>
   );
+  
 }
 
 export default Login;
+
