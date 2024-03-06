@@ -19,6 +19,19 @@ const App: React.FC = () => {
 const Apps = () => {
   return (
     <div className="App">
+      <header className="App-header">Hello world!</header>
+    </div>
+  );
+}
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+const App = () => {
+  return (
+    <div className="App">
       <header className="App-header">
         Hello world!
       </header>
@@ -27,5 +40,6 @@ const Apps = () => {
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 
 export default App;
