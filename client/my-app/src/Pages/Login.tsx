@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseApp, FirebaseOptions, initializeApp, getApp } from 'firebase/app';
 import firebaseConfig from '../config/firebase'; // Make sure to provide the correct path to your Firebase config
+//import '../Login.css';
 
 
 // Initialize Firebase app

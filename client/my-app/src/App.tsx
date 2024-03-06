@@ -22,7 +22,6 @@ const Apps = () => {
       <header className="App-header">
         Hello world!
       </header>
-
     </div>
   );
 };

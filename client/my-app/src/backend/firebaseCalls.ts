@@ -1,7 +1,10 @@
-import { AuthError, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  AuthError,
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import app from "../config/firebase";
-
-
 
 export function authenticateUser(email: string, password: string) {
   return new Promise((resolve, reject) => {
@@ -28,4 +31,3 @@ export function registerUser(email: string, password: string) {
       });
   });
 }
-
