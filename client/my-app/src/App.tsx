@@ -7,8 +7,22 @@ import Schedule from './Pages/Schedule';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="App">
+      
+      <header className="App-header">Hello world!</header>
+
       <Login />
+    </div>
+  );
+}
+
+const Apps = () => {
+  return (
+    <div className="App">
+      <header className="App-header">
+        Hello world!
+      </header>
+
     </div>
   );
 };
