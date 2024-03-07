@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddBooksForm from '../Components/AddBooksForm';
 import '../Library.css'
+import {db} from '../config/firebase';
+import {getDocs, collection, addDoc, deleteDoc,updateDoc, setDoc, doc, writeBatch} from "firebase/firestore";
 
+
+type ChapterQuestions = {
+    chapterId: string;
+    chapterNumber: number;
+    questions: string[];
+    answers: string[];
+};
 
 type Book = {
-    id: number;
+    id: string;
     title: string;
     description?: string;
-    questions?: string[];
+    chapters?: ChapterQuestions[];
     imageUrl?: string;
 };
 
@@ -15,36 +24,110 @@ const Library: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [activeBook, setActiveBook] = useState<Book | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
-    const [showDropdownMenu, setShowDropdownMenu] = useState<number | null>(null);
+    const [showDropdownMenu, setShowDropdownMenu] = useState<string | null>(null);
+    const bookCollection = collection(db, "books");
 
-    const addBookToLibrary = () => {
+    useEffect(() => {
+        const fetchBooks = async () => {
+          const querySnapshot = await getDocs(bookCollection);
+          const booksWithChapters: Book[] = [];
+      
+          for (const doc of querySnapshot.docs) {
+            const bookData: Book = doc.data() as Book;
+            bookData.id = doc.id;  // Make sure to set the book id from the document
+      
+            // Now fetch chapters for this book
+            const chaptersRef = collection(db, 'books', doc.id, 'Chapters');
+            const chaptersSnapshot = await getDocs(chaptersRef);
+            const chapterMap: { [key: number]: ChapterQuestions } = {};
+      
+            chaptersSnapshot.forEach((chapterDoc) => {
+              const chapterData = chapterDoc.data();
+              const chapterNumber = chapterData.chapterNumber;
+      
+              // Initialize the chapter in the map if it doesn't exist
+              if (!chapterMap[chapterNumber]) {
+                chapterMap[chapterNumber] = {
+                  chapterId: chapterDoc.id, // Assuming the chapter document id is what you mean by chapterData.id
+                  chapterNumber: chapterNumber,
+                  questions: [],
+                  answers: [],
+                };
+              }
+      
+              // Push the question and answer into the chapter
+              chapterMap[chapterNumber].questions.push(...chapterData.questions); // Assuming these are arrays
+              chapterMap[chapterNumber].answers.push(...chapterData.answers);
+            });
+      
+            // Convert the map into an array of ChapterQuestions
+            bookData.chapters = Object.values(chapterMap);
+            booksWithChapters.push(bookData);
+            console.log(bookData);
+          }
+      
+          // Set the state with all books including their chapters
+          setBooks(booksWithChapters);
+        };
+      
+        fetchBooks();
+      }, []);
+      
+
+
+    const addBookToLibrary = async() => {
+        const chId = Date.now().toString();
+        const id = Date.now().toString();
+        const temp = [{chapterId:chId, chapterNumber: 1, questions: ['Question'], answers: ['Answer']}];
+        const bookRef = doc(db, 'books', id);
         const newBook: Book = {
-            id: Date.now(), // Using Date.now() for a more unique id...
+            id:id,
             title: '',
             description: '',
-            questions: [],
+            chapters: temp,
             imageUrl: '',
         };
+
+        await setDoc(bookRef, {title:'', description: '', imageUrl: ''});
+        const chapterRef = doc(db, 'books', id, 'Chapters', chId);
+        await setDoc(chapterRef, {
+            chapterNumber: 1,
+            questions: ['Question'],
+            answers: ['Answer'],
+        });
         setBooks([newBook, ...books]);
+        console.log(newBook);
+        console.log(temp);
     };
 
-    const saveBookData = (bookData: Book) => {
-        const updatedBooks = books.map((book) => (book.id === bookData.id ? bookData : book));
-        setBooks(updatedBooks);
+
+    const saveBookData = async(bookData: Book) => {
+        console.log(bookData);
+        
+        
         setActiveBook(null);
     };
 
     const handleCloseModal = () => {
         setActiveBook(null);
     };
-    const deleteBook = (id: number) => {
+
+    const deleteBook = async (id: string) => {
+        const chaptersRef = collection(db, 'books', id, 'Chapters');
+    const querySnapshot = await getDocs(chaptersRef);
+    const batch = writeBatch(db);
+
+    querySnapshot.forEach((doc) => {
+        batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+        await deleteDoc(doc(db, 'books', id));
         setBooks(books.filter(book => book.id !== id));
     };
 
 
     const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()));
-
-
 
     return (
         <div className="library-container">
@@ -72,10 +155,10 @@ const Library: React.FC = () => {
                         </div>
                         <div className="book-title">{book.title || 'No Title'}</div>
                         <div className="dropdown">
-                            <button className="dropbtn" onClick={() => setShowDropdownMenu(showDropdownMenu === book.id ? null : book.id)}>⋮</button>
+                            <button className="dropbtn" onClick={() => setShowDropdownMenu(showDropdownMenu === book.id ? null : book.id)}>Edit</button>
                             {showDropdownMenu === book.id && (
                                 <div className="dropdown-content">
-                                    <button onClick={() => setActiveBook(book)}>Edit</button>
+                                    <button onClick={() => setActiveBook(book)}>Modify</button>
                                     <button onClick={() => deleteBook(book.id)}>Delete</button>
                                 </div>
                             )}
@@ -88,6 +171,7 @@ const Library: React.FC = () => {
                     <div className="modal-content">
                         <span className="close" onClick={handleCloseModal}>&times;</span>
                         <AddBooksForm
+                            
                             book={activeBook}
                             onSave={saveBookData}
                             onClose={handleCloseModal}
@@ -98,8 +182,5 @@ const Library: React.FC = () => {
         </div>
     );
 };
-
-
-
 
 export default Library;
