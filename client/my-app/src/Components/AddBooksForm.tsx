@@ -63,7 +63,6 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
   //when you submit, save whatever's in useState to array and database
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("yay");
 
     // Reference to the existing book document
     const bookRef = doc(db, "books", book.id);
@@ -105,17 +104,17 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
     deleteChapters.forEach((chapterId) => {
       const chapterRef = doc(db, "books", book.id, "Chapters", chapterId);
       batch.delete(chapterRef); // Delete the entire chapter document
-      console.log(`Chapter ${chapterId} marked for deletion.`);
+      //   console.log(`Chapter ${chapterId} marked for deletion.`);
     });
 
     // Commit the batch
     try {
       await batch.commit();
       doDeleteChapters([]);
-      console.log("All updates committed successfully");
+      //   console.log("All updates committed successfully");
       // Optionally, call onSave with the updated book details if needed
     } catch (error) {
-      console.error("Error committing updates: ", error);
+      //   console.error("Error committing updates: ", error);
     }
   };
 
@@ -125,9 +124,9 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
     questionIndex: number
   ) => {
     const newChapters = [...chapters];
-    console.log(activeChapter);
-    console.log(chapterIndex);
-    console.log(newChapters);
+    // console.log(activeChapter);
+    // console.log(chapterIndex);
+    // console.log(newChapters);
     newChapters[chapterIndex].questions[questionIndex] = question;
     setChapters(newChapters);
   };

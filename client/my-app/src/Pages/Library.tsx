@@ -73,7 +73,7 @@ const Library: React.FC = () => {
         // Convert the map into an array of ChapterQuestions
         bookData.chapters = Object.values(chapterMap);
         booksWithChapters.push(bookData);
-        console.log(bookData);
+        // console.log(bookData);
       }
 
       // Set the state with all books including their chapters
@@ -112,12 +112,12 @@ const Library: React.FC = () => {
       answers: ["Answer"],
     });
     setBooks([newBook, ...books]);
-    console.log(newBook);
-    console.log(temp);
+    // console.log(newBook);
+    // console.log(temp);
   };
   //lowkey don't need these
   const saveBookData = async (bookData: Book) => {
-    console.log(bookData);
+    // console.log(bookData);
 
     setActiveBook(null);
   };
