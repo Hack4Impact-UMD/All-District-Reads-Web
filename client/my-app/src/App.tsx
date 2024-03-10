@@ -1,13 +1,36 @@
-// App.tsx
+import "./App.css";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Login from './Pages/Login';
+import Schedule from './Pages/Schedule';
 import { FirebaseOptions, initializeApp } from "firebase/app";
-import firebaseConfig from './config/firebase'; // Assuming this is the correct path to your firebaseConfig file
+import firebaseConfig from './config/firebase';
+
+const App: React.FC = () => {
+  return (
+    <div className="App">
+      
+      <header className="App-header">Hello world!</header>
+
+      <Login />
+    </div>
+  );
+}
+
+const Apps = () => {
+  return (
+    <div className="App">
+      <header className="App-header">Hello world!</header>
+    </div>
+  );
+}
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig as FirebaseOptions);
 
-const App = () => {
+const AppF = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -16,6 +39,8 @@ const App = () => {
     </div>
   );
 };
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
