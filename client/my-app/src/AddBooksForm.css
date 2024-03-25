@@ -1,0 +1,124 @@
+.add-books-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: auto;
+}
+
+.add-books-form input[type="text"],
+.add-books-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-group input[type="text"]::placeholder,
+.add-books-form textarea::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+
+.add-books-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+.add-books-form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.add-books-form button[type="button"] {
+    /* Styling for 'Add Question' button */
+    background-color: #f0ad4e;
+}
+
+.add-books-form button:hover {
+    opacity: 0.9;
+    background-color: #45a049;
+    transition: 400ms;
+}
+
+.add-books-form .close {
+    margin-bottom: 20px;
+    /* Give some space between the close button and the form elements */
+    display: inline-block;
+    /* To enable margin-top to work */
+    cursor: pointer;
+}
+
+.add-books-form .question-input {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.add-books-form .question-input input {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.upload-cover {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    text-align: center;
+    color: #888;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.upload-cover:hover {
+    border-color: #777;
+}
+
+.chapter-questions {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.question-item {
+    margin-bottom: 15px;
+}
+
+.question-item input[type="text"] {
+    margin-top: 5px;
+    /* Spacing above inputs within a question */
+}
+
+/* Edit question modal styling */
+.edit-question-modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    /* Or absolute, depending on your needs */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+    /* Adjust the width as needed */
+    z-index: 10;
+    /* Make sure it's above other content */
+}
