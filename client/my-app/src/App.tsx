@@ -1,6 +1,24 @@
 import "./App.css";
 
-function App() {
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Login from './Pages/Login';
+import Schedule from './Pages/Schedule';
+import { FirebaseOptions, initializeApp } from "firebase/app";
+import firebaseConfig from './config/firebase';
+
+const App: React.FC = () => {
+  return (
+    <div className="App">
+      
+      <header className="App-header">Hello world!</header>
+
+      <Login />
+    </div>
+  );
+}
+
+const Apps = () => {
   return (
     <div className="App">
       <header className="App-header">Hello world!</header>
@@ -10,10 +28,9 @@ function App() {
 
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig as FirebaseOptions);
 
-
-const App = () => {
+const AppF = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,7 +38,10 @@ const App = () => {
       </header>
     </div>
   );
-}
+};
 
+ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;
