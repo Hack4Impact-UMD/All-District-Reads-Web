@@ -1,0 +1,120 @@
+.page {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 10%;
+  overflow: auto;
+}
+
+.pageTop {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pageTitle {
+  font-size: 37px;
+  color: #757575;
+  font-weight: 600;
+}
+
+.button {
+  background-color: #e6e6e6;
+  color: #636363;
+  font-weight: bold;
+}
+
+.select {
+  width: 300px;
+  background-color: #e6e6e6;
+  font-weight: bold;
+  text-align: left;
+}
+
+.newChapterContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.title {
+  font-size: 30px;
+  color: #757575;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  padding-bottom: 20px;
+}
+
+.leftQuestionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rightQuestionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding-top: 40px;
+}
+
+.inputBox {
+  background-color: #e6e6e6;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: rgba(0, 0, 0, 0.33);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.datePicker {
+  width: 230px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+}
+
+.chapterQuestionDatabase {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 20px;
+}
+
+.questionsHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.questionsContainer {
+  max-height: 300px;
+  width: 100%;
+  background-color: #e6e6e6;
+  border-radius: 10px;
+  align-items: center;
+  overflow: auto;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
