@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Login from './Pages/Login';
 import reportWebVitals from './reportWebVitals';
+import Dashboard from './Pages/Dashboard';
 
 
 const root = ReactDOM.createRoot(
@@ -14,7 +15,7 @@ root.render(
   <React.StrictMode>
 
     {/* <App /> */}
-    <Login />
+    <Dashboard />
   </React.StrictMode>
 
 );
