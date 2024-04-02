@@ -21,7 +21,7 @@ const ReadingSchedule = (props: ReadingScheduleProps) => {
   const [assignmentDescription, setAssignmentDescription] = useState<string>();
   const [bookTitle, setBookTitle] = useState<string>();
   const [assignedChapter, setAssignedChapter] = useState<string>();
-  const [date, setDate] = useState<Date | null>(null);
+  const [date, setDate] = useState<Dayjs | null>(null);
   const [url, setUrl] = useState<string>();
 
   // TODO: update w/ info from db
