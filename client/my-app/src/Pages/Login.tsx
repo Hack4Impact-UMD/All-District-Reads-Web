@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseApp, FirebaseOptions, initializeApp, getApp } from 'firebase/app';
 import firebaseConfig from '../config/firebase'; // Make sure to provide the correct path to your Firebase config
+import { createAdminUser } from '../backend/cloudFunctionCalls';
 //import '../Login.css';
 
 
@@ -47,6 +48,7 @@ function Login() {
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, registrationEmail, registrationPassword);
+      await createAdminUser(registrationEmail);
       console.log('Registration successful:', userCredential.user);
       setRegistrationButtonClicked(true); // Set registrationButtonClicked to true when registration button is clicked
       setRegistrationError('');
