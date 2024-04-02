@@ -6,7 +6,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Library from "./Pages/Library";
 import Login from './Pages/Login';
-import reportWebVitals from './reportWebVitals';
 import Dashboard from './Pages/Dashboard';
 
 
@@ -17,7 +16,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Dashboard />
     {/*<App />*/}
     <Library />
   </React.StrictMode>
