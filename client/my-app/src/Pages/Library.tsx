@@ -227,7 +227,7 @@ const Library: React.FC = () => {
           <div className="view-buttons">
             <button onClick={() => setView('grid')}>Grid View</button>
             <button onClick={() => setView('list')}>List View</button>
-            <button onClick={handleAddBookClick}>Add Book</button>
+            <button onClick={addBookToLibrary}>Add Book</button>
           </div>
         </div>
       </div>
@@ -238,7 +238,12 @@ const Library: React.FC = () => {
           {filteredBooks.map((book) => (
             <div className="book-card" key={book.id}>
               <div className="book-image-container">
-                {/* Book image or placeholder */}
+                {/* Display book image or a placeholder if there's no image */}
+                {book.imageUrl ? (
+                  <img src={book.imageUrl} alt={book.title} className="book-image" />
+                ) : (
+                  <div className="book-placeholder">No Image Available</div>
+                )}
               </div>
               <div className="book-title">{book.title || "No Title"}</div>
               <div className="dropdown">
