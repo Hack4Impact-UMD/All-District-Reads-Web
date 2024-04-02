@@ -35,6 +35,14 @@ const Library: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showDropdownMenu, setShowDropdownMenu] = useState<string | null>(null);
   const bookCollection = collection(db, "books");
+  const [view, setView] = useState<'grid' | 'list' | 'add'>('grid');
+  const placeholderBook: Book = {
+    id: '',
+    title: '',
+    description: '',
+    chapters: [],
+    imageUrl: ''
+  };
 
   //load the books
   useEffect(() => {
@@ -83,6 +91,35 @@ const Library: React.FC = () => {
     fetchBooks();
   }, []);
 
+  const BookList = ({ books }: { books: Book[] }) => (
+    <div>
+      {books.map((book) => (
+        <div
+          key={book.id}
+          className="book-list-item"
+          onClick={() => setActiveBook(book)} // Set the activeBook when an item is clicked
+        >
+          <div>{book.title || "No Title"}</div>
+          <div>{book.description}</div>
+          {/* Add more book details you want to list */}
+        </div>
+      ))}
+    </div>
+  );
+
+
+  const handleAddBookClick = () => {
+    const tempId = `temp-${Date.now()}`; // Generate a temporary unique ID
+    setActiveBook({
+      id: tempId,
+      title: '',
+      description: '',
+      chapters: [],
+      imageUrl: ''
+    });
+
+  };
+
   //add it in baby
   const addBookToLibrary = async () => {
     const chId = Date.now().toString();
@@ -115,12 +152,32 @@ const Library: React.FC = () => {
     // console.log(newBook);
     // console.log(temp);
   };
-  //lowkey don't need these
   const saveBookData = async (bookData: Book) => {
-    // console.log(bookData);
+    let savedBookId = bookData.id;
 
-    setActiveBook(null);
+    if (!bookData.id.startsWith('temp-')) {
+      // Existing book: Update logic here
+    } else {
+      // New book: Save logic here
+      const docRef = await addDoc(collection(db, "books"), {
+        title: bookData.title,
+        description: bookData.description,
+        // Other properties...
+      });
+      savedBookId = docRef.id; // Update with the permanent ID from Firestore
+    }
+
+    // Update the local state with the new or updated book
+    // For a new book, replace the temporary ID with the permanent Firestore ID
+    setBooks((prevBooks) =>
+      prevBooks.map((book) =>
+        book.id === bookData.id ? { ...bookData, id: savedBookId } : book)
+    );
+
+    // Additional logic to handle the state update...
   };
+
+
 
   const handleCloseModal = () => {
     setActiveBook(null);
@@ -128,18 +185,27 @@ const Library: React.FC = () => {
 
   //delete in database and array
   const deleteBook = async (id: string) => {
-    const chaptersRef = collection(db, "books", id, "Chapters");
+    if (!id) {
+      console.error("Book ID is invalid.");
+      return;
+    }
+
+    // Now we're sure the ID is valid, proceed with deletion
+    const chaptersRef = collection(db, `books/${id}/Chapters`);
+
+    // Fetch all documents in the "Chapters" subcollection
     const querySnapshot = await getDocs(chaptersRef);
     const batch = writeBatch(db);
 
+    // Add each chapter document to the batch delete
     querySnapshot.forEach((doc) => {
       batch.delete(doc.ref);
     });
-
     await batch.commit();
     await deleteDoc(doc(db, "books", id));
     setBooks(books.filter((book) => book.id !== id));
   };
+
 
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -157,39 +223,64 @@ const Library: React.FC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-bar"
           />
+          {/* View mode buttons */}
+          <div className="view-buttons">
+            <button onClick={() => setView('grid')}>Grid View</button>
+            <button onClick={() => setView('list')}>List View</button>
+            <button onClick={handleAddBookClick}>Add Book</button>
+          </div>
         </div>
       </div>
-      <button onClick={addBookToLibrary}>Add a New Book</button>
 
       <h2>Recently Added</h2>
-      <div className="book-grid">
-        {filteredBooks.map((book) => (
-          <div className="book-card" key={book.id}>
-            <div className="book-image-container">
-              {/* Book image or placeholder */}
+      {view === 'grid' && (
+        <div className="book-grid">
+          {filteredBooks.map((book) => (
+            <div className="book-card" key={book.id}>
+              <div className="book-image-container">
+                {/* Book image or placeholder */}
+              </div>
+              <div className="book-title">{book.title || "No Title"}</div>
+              <div className="dropdown">
+                <button
+                  className="dropbtn"
+                  onClick={() =>
+                    setShowDropdownMenu(
+                      showDropdownMenu === book.id ? null : book.id
+                    )
+                  }
+                >
+                  Edit
+                </button>
+                {showDropdownMenu === book.id && (
+                  <div className="dropdown-content">
+                    <button onClick={() => setActiveBook(book)}>Modify</button>
+                    <button onClick={() => deleteBook(book.id)}>Delete</button>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="book-title">{book.title || "No Title"}</div>
-            <div className="dropdown">
-              <button
-                className="dropbtn"
-                onClick={() =>
-                  setShowDropdownMenu(
-                    showDropdownMenu === book.id ? null : book.id
-                  )
-                }
-              >
-                Edit
-              </button>
-              {showDropdownMenu === book.id && (
-                <div className="dropdown-content">
-                  <button onClick={() => setActiveBook(book)}>Modify</button>
-                  <button onClick={() => deleteBook(book.id)}>Delete</button>
-                </div>
-              )}
+          ))}
+        </div>
+      )}
+      {view === 'list' && (
+        <div>
+          {filteredBooks.map((book) => (
+            <div key={book.id} className="book-list-item">
+              <div>{book.title || "No Title"}</div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+
+      {view === 'add' && (
+        <AddBooksForm
+          book={placeholderBook}
+          onSave={saveBookData}
+          onClose={handleCloseModal}
+        />
+      )}
+
       {activeBook && (
         <div className="modal show-modal">
           <div className="modal-content">
@@ -205,7 +296,9 @@ const Library: React.FC = () => {
         </div>
       )}
     </div>
+
   );
 };
+
 
 export default Library;

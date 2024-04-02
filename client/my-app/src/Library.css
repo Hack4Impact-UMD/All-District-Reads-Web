@@ -67,6 +67,7 @@
     gap: 20px;
     /* This creates space between the books */
     padding: 20px;
+    flex-grow: 1;
 }
 
 .book-card {
@@ -75,6 +76,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* Stack image and text vertically */
     transition: box-shadow 0.3s ease;
 }
 
@@ -190,4 +194,31 @@
 
 .dropdown:active .dropdown-content {
     display: block;
+}
+
+.view-buttons {
+    display: flex;
+    gap: 10px;
+    /* Adjust as needed */
+    margin-left: auto;
+    /* This will push the buttons to the end of the search bar */
+}
+
+.view-buttons button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #ddd;
+    /* Your color */
+    cursor: pointer;
+}
+
+.view-buttons button:hover {
+    background-color: #ccc;
+    /* Darker shade for hover state */
+}
+
+.book-list-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
 }
