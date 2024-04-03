@@ -1,22 +1,25 @@
 .add-books-form {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
-    margin: auto;
+    max-width: 90%;
+    margin: 20px auto;
 }
+
 
 .add-books-form input[type="text"],
 .add-books-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    display: inline-block;
+    width: calc(100% - 24px);
+    /* Adjusted width for padding */
+    padding: 12px;
+    margin: 10px 0;
+    display: block;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     box-sizing: border-box;
 }
+
 
 .input-group input[type="text"]::placeholder,
 .add-books-form textarea::placeholder {
@@ -26,7 +29,7 @@
 
 
 .add-books-form button {
-    background-color: #4CAF50;
+    background-color: #747272;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -45,12 +48,21 @@
 
 .add-books-form button[type="button"] {
     /* Styling for 'Add Question' button */
-    background-color: #f0ad4e;
+    background-color: #747272;
+    color: white;
+    padding: 14px 24px;
+    margin: 20px 0 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
 }
 
 .add-books-form button:hover {
     opacity: 0.9;
-    background-color: #45a049;
+    background-color: #414141;
     transition: 400ms;
 }
 
@@ -91,14 +103,19 @@
 }
 
 .chapter-questions {
-    background-color: #f9f9f9;
-    padding: 15px;
+    background-color: #f6f6f6;
+    padding: 20px;
     margin-top: 20px;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .question-item {
     margin-bottom: 15px;
+}
+
+.question-item label {
+    font-weight: bold;
 }
 
 .question-item input[type="text"] {
@@ -120,5 +137,4 @@
     max-width: 500px;
     /* Adjust the width as needed */
     z-index: 10;
-    /* Make sure it's above other content */
 }

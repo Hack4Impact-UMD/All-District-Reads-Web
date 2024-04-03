@@ -96,7 +96,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
       }
     }
 
-    onClose(); 
+    onClose();
   };
 
   const handleChapterQuestionChange = (
@@ -327,7 +327,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
           </div>
         )}
         <button type="submit" className="save-button">
-          Save
+          Publish
         </button>
       </form>
     </div>

@@ -92,19 +92,21 @@ const Library: React.FC = () => {
   }, []);
 
   const BookList = ({ books }: { books: Book[] }) => (
-    <div>
+    <div className="book-list">
       {books.map((book) => (
-        <div
-          key={book.id}
-          className="book-list-item"
-          onClick={() => setActiveBook(book)} // Set the activeBook when an item is clicked
-        >
-          <div>{book.title || "No Title"}</div>
-          <div>{book.description}</div>
-          {/* Add more book details you want to list */}
+        <div key={book.id} className="book-list-item">
+          <div className="book-list-details">
+            <div className="book-title">{book.title || "No Title"}</div>
+            {/* Additional details can be added here */}
+          </div>
+          <div className="book-list-actions">
+            <button onClick={() => setActiveBook(book)}>Modify</button>
+            <button onClick={() => deleteBook(book.id)}>Delete</button>
+          </div>
         </div>
       ))}
     </div>
+
   );
 
 
@@ -218,7 +220,7 @@ const Library: React.FC = () => {
         <div className="search-bar-container">
           <input
             type="text"
-            placeholder="Search for a book..."
+            placeholder="Search for a book"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-bar"
@@ -233,74 +235,76 @@ const Library: React.FC = () => {
       </div>
 
       <h2>Recently Added</h2>
-      {view === 'grid' && (
-        <div className="book-grid">
-          {filteredBooks.map((book) => (
-            <div className="book-card" key={book.id}>
-              <div className="book-image-container">
-                {/* Display book image or a placeholder if there's no image */}
-                {book.imageUrl ? (
-                  <img src={book.imageUrl} alt={book.title} className="book-image" />
-                ) : (
-                  <div className="book-placeholder">No Image Available</div>
-                )}
+      {
+        view === 'grid' && (
+          <div className="book-grid">
+            {filteredBooks.map((book) => (
+              <div className="book-card" key={book.id}>
+                <div className="book-image-container">
+                  {book.imageUrl ? (
+                    <img src={book.imageUrl} alt={book.title} className="book-image" />
+                  ) : (
+                    <div className="book-placeholder">No Image Available</div>
+                  )}
+                </div>
+                <div className="book-title">{book.title || "No Title"}</div>
+                <div className="book-card-options">
+                  <button onClick={() => setActiveBook(book)}>Modify</button>
+                  <button onClick={() => deleteBook(book.id)}>Delete</button>
+                </div>
               </div>
-              <div className="book-title">{book.title || "No Title"}</div>
-              <div className="dropdown">
-                <button
-                  className="dropbtn"
-                  onClick={() =>
-                    setShowDropdownMenu(
-                      showDropdownMenu === book.id ? null : book.id
-                    )
-                  }
-                >
-                  Edit
-                </button>
-                {showDropdownMenu === book.id && (
-                  <div className="dropdown-content">
-                    <button onClick={() => setActiveBook(book)}>Modify</button>
-                    <button onClick={() => deleteBook(book.id)}>Delete</button>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      {view === 'list' && (
-        <div>
-          {filteredBooks.map((book) => (
-            <div key={book.id} className="book-list-item">
-              <div>{book.title || "No Title"}</div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {view === 'add' && (
-        <AddBooksForm
-          book={placeholderBook}
-          onSave={saveBookData}
-          onClose={handleCloseModal}
-        />
-      )}
-
-      {activeBook && (
-        <div className="modal show-modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <AddBooksForm
-              book={activeBook}
-              onSave={saveBookData}
-              onClose={handleCloseModal}
-            />
+            ))}
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+
+      {
+        view === 'list' && (
+          <div className="book-list">
+            {filteredBooks.map((book) => (
+              <div key={book.id} className="book-list-item">
+                <div className="book-details">
+                  <div className="book-title">{book.title || "No Title"}</div>
+                  {/* Other details can be added here if needed */}
+                </div>
+                <div className="book-list-options">
+                  <button onClick={() => setActiveBook(book)}>Modify</button>
+                  <button onClick={() => deleteBook(book.id)}>Delete</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      }
+
+
+      {
+        view === 'add' && (
+          <AddBooksForm
+            book={placeholderBook}
+            onSave={saveBookData}
+            onClose={handleCloseModal}
+          />
+        )
+      }
+
+      {
+        activeBook && (
+          <div className="modal show-modal">
+            <div className="modal-content">
+              <span className="close" onClick={handleCloseModal}>
+                &times;
+              </span>
+              <AddBooksForm
+                book={activeBook}
+                onSave={saveBookData}
+                onClose={handleCloseModal}
+              />
+            </div>
+          </div>
+        )
+      }
+    </div >
 
   );
 };
