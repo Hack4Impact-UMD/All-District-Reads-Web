@@ -100,7 +100,7 @@ const Library: React.FC = () => {
             {/* Additional details can be added here */}
           </div>
           <div className="book-list-actions">
-            <button onClick={() => setActiveBook(book)}>Modify</button>
+            <button onClick={() => setActiveBook(book)}>Edit</button>
             <button onClick={() => deleteBook(book.id)}>Delete</button>
           </div>
         </div>
@@ -249,7 +249,7 @@ const Library: React.FC = () => {
                 </div>
                 <div className="book-title">{book.title || "No Title"}</div>
                 <div className="book-card-options">
-                  <button onClick={() => setActiveBook(book)}>Modify</button>
+                  <button onClick={() => setActiveBook(book)}>Edit</button>
                   <button onClick={() => deleteBook(book.id)}>Delete</button>
                 </div>
               </div>
@@ -268,7 +268,7 @@ const Library: React.FC = () => {
                   {/* Other details can be added here if needed */}
                 </div>
                 <div className="book-list-options">
-                  <button onClick={() => setActiveBook(book)}>Modify</button>
+                  <button onClick={() => setActiveBook(book)}>Edit</button>
                   <button onClick={() => deleteBook(book.id)}>Delete</button>
                 </div>
               </div>

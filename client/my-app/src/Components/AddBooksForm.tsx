@@ -59,7 +59,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
   const [numberOfChapters, setNumberOfChapters] = useState(
     chapters.length || 1
   ); //number of chapters
-  const [activeChapter, setExactChapter] = useState(1); //which on you're on
+  const [activeChapter, setExactChapter] = useState(0); //which on you're on
   //when you submit, save whatever's in useState to array and database
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -212,62 +212,74 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
     <div className="add-books-form">
       <h1>Edit Book</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Book Title:
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="form-input"
-            placeholder="Untitled"
-          />
-        </label>
-        <label>
-          Book Image URL:
-          <input
-            type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            className="form-input"
-          />
-        </label>
+        <div className="form-section">
+          <label>
+            Book Title:
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="form-input small-input"
+              placeholder="Untitled"
+            />
+          </label>
+          <label>
+            Book Image URL:
+            <input
+              type="text"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              className="form-input small-input"
+              placeholder="https://"
+            />
+          </label>
+        </div>
+
         <label>
           Book Description:
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="form-textarea"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") e.preventDefault();
-            }}
+            className="form-textarea large-input"
+            placeholder="Book description here..."
+
           />
         </label>
-        <label>
-          Number of Chapters:
-          <input //how many
-            type="number"
-            value={numberOfChapters}
-            onChange={(e) =>
-              handleNumberOfChaptersChange(Number(e.target.value))
-            }
-            className="form-input"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") e.preventDefault();
-            }}
-          />
-        </label>
-        <div className="chapter-selector">
-          <select
-            value={activeChapter}
-            onChange={(e) => setExactChapter(Number(e.target.value))}
-            className="form-select"
-          >
-            {chapters.map((item, index) => (
-              <option key={index} value={item.chapterNumber}>
-                Chapter {item.chapterNumber}
-              </option>
-            ))}
-          </select>
+        <div className="chapter-controls">
+          {/* Number of Chapters input */}
+          <div className="number-of-chapters">
+
+            <label>
+              Number of Chapters:
+              <input //how many
+                type="number"
+                value={numberOfChapters}
+                onChange={(e) =>
+                  handleNumberOfChaptersChange(Number(e.target.value))
+                }
+                className="form-input"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") e.preventDefault();
+                }}
+              />
+            </label>
+          </div>
+
+          <div className="select-chapter">
+            <select
+              value={activeChapter}
+              onChange={(e) => setExactChapter(Number(e.target.value))}
+              className="form-select"
+            >
+              <option value="">Select Chapter</option> {/* Add this line */}
+              {chapters.map((item, index) => (
+                <option key={index} value={item.chapterNumber}>
+                  Chapter {item.chapterNumber}
+                </option>
+              ))}
+            </select>
+          </div>
+
         </div>
         {activeChapterContent && (
           <div className="chapter-questions">
@@ -279,13 +291,11 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
                   <input
                     type="text"
                     value={question}
-                    onChange={(e) =>
-                      handleChapterQuestionChange(
-                        activeChapter - 1,
-                        e.target.value,
-                        questionIndex
-                      )
-                    }
+                    onChange={(e) => handleChapterQuestionChange(
+                      activeChapter - 1,
+                      e.target.value,
+                      questionIndex
+                    )}
                     placeholder="Example"
                     className="form-input"
                   />
@@ -295,27 +305,24 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
                   <input
                     type="text"
                     value={activeChapterContent?.answers[questionIndex]}
-                    onChange={(e) =>
-                      handleChapterAnswerChange(
-                        activeChapter - 1,
-                        e.target.value,
-                        questionIndex
-                      )
-                    }
+                    onChange={(e) => handleChapterAnswerChange(
+                      activeChapter - 1,
+                      e.target.value,
+                      questionIndex
+                    )}
                     placeholder="Example"
                     className="form-input"
                   />
                 </label>
                 <button
                   type="button"
-                  onClick={() =>
-                    deleteQuestion(activeChapter - 1, questionIndex)
-                  }
+                  onClick={() => deleteQuestion(activeChapter - 1, questionIndex)}
                   className="delete-question"
                 >
                   X
                 </button>
               </div>
+
             ))}
             <button
               type="button"
@@ -325,12 +332,13 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
               Add Question
             </button>
           </div>
-        )}
+        )
+        }
         <button type="submit" className="save-button">
           Publish
         </button>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 

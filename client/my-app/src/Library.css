@@ -88,7 +88,7 @@
 }
 
 .book-image-container {
-    height: 150px;
+    height: 250px;
     /* Set this to the desired height */
     background-color: #f4f4f4;
     /* Placeholder color if there's no image */
@@ -279,4 +279,8 @@
 
 .book-list-options button {
     margin-left: 10px;
+}
+
+.form-vals {
+    border-radius: 10px;
 }
