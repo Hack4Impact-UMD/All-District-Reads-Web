@@ -15,7 +15,7 @@
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #888;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -67,6 +67,7 @@
     gap: 20px;
     /* This creates space between the books */
     padding: 20px;
+    flex-grow: 1;
 }
 
 .book-card {
@@ -75,6 +76,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* Stack image and text vertically */
     transition: box-shadow 0.3s ease;
 }
 
@@ -84,7 +88,7 @@
 }
 
 .book-image-container {
-    height: 150px;
+    height: 250px;
     /* Set this to the desired height */
     background-color: #f4f4f4;
     /* Placeholder color if there's no image */
@@ -97,11 +101,23 @@
 .book-image-container img {
     width: 100%;
     height: auto;
+    display: block;
 }
 
 .book-placeholder {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    height: 150px;
     color: #666;
+    font-size: 14px;
+}
+
+.book-title {
+    white-space: inherit;
+    margin: 10px 0;
+    padding: 0 10px;
 }
 
 
@@ -125,18 +141,25 @@
 .library-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+    padding-right: 20px;
 }
 
 .search-bar {
     padding: 10px;
-    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-left: 130px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 .book-card {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    max-width: 100%;
+    margin: 10px;
 }
 
 .edit-book,
@@ -190,4 +213,74 @@
 
 .dropdown:active .dropdown-content {
     display: block;
+}
+
+.view-buttons {
+    display: flex;
+    gap: 10px;
+    /* Adjust as needed */
+    margin-left: auto;
+    /* This will push the buttons to the end of the search bar */
+}
+
+.view-buttons button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.view-buttons button:hover {
+    background-color: #ccc;
+}
+
+.book-list-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.book-card-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.book-card:hover .book-card-options {
+    display: block;
+    /* Show options on hover */
+}
+
+.book-card-options button {
+    border: none;
+    background-color: #f4f4f4;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.book-card-options button:hover {
+    background-color: #e0e0e0;
+}
+
+.book-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.book-list-options button {
+    margin-left: 10px;
+}
+
+.form-vals {
+    border-radius: 10px;
 }
