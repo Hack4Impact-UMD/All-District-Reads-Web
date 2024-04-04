@@ -35,7 +35,6 @@ const Library: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showDropdownMenu, setShowDropdownMenu] = useState<string | null>(null);
   const bookCollection = collection(db, "books");
-
   //load the books
   useEffect(() => {
     const fetchBooks = async () => {
