@@ -113,6 +113,8 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
       doDeleteChapters([]);
       //   console.log("All updates committed successfully");
       // Optionally, call onSave with the updated book details if needed
+      console.log("All updates committed successfully");
+      onClose(); // This will close the form
     } catch (error) {
       //   console.error("Error committing updates: ", error);
     }
