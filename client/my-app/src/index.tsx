@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import Library from "./Pages/Library";
 import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
-
+import Home from "./Pages/Home"
 
 
 const root = ReactDOM.createRoot(
@@ -17,7 +17,7 @@ root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/*<App />*/}
-    <Library />
+    <Home />
   </React.StrictMode>
 );
 
