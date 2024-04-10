@@ -1,13 +1,14 @@
-import {initializeApp} from 'firebase/app';
-import {getAuth, sendPasswordResetEmail} from '@firebase/auth';
-import {getFunctions, httpsCallable} from 'firebase/functions';
+import { initializeApp } from "firebase/app";
+import { getAuth, sendPasswordResetEmail } from "@firebase/auth";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
-export function createAdminUser(
-  email: string
-): Promise<void> {
+export function createAdminUser(email: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const functions = getFunctions();
-    const createAdminCloudFunction = httpsCallable(functions, 'createAdminUser');
+    const createAdminCloudFunction = httpsCallable(
+      functions,
+      "createAdminUser",
+    );
 
     createAdminCloudFunction({
       email: email,
@@ -19,7 +20,7 @@ export function createAdminUser(
       .then(async () => {
         resolve();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
         reject();
       });
