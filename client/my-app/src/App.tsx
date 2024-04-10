@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import Schedule from './Pages/Schedule';
 import { FirebaseOptions, initializeApp } from "firebase/app";
 import firebaseConfig from './config/firebase';
+import ReadingSchedule from "./ReadingSchedule";
 
 const App: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const App: React.FC = () => {
       
       <header className="App-header">Hello world!</header>
 
-      <Login />
+      <ReadingSchedule />
     </div>
   );
 }
