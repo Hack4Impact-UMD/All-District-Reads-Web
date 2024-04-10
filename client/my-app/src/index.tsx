@@ -7,15 +7,19 @@ import Library from "./Pages/Library";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 
+
+// Find the root of your app
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
-);
-root.render(
-  <React.StrictMode>
-    {/* <App /> */}
-    {/*<App />*/}
-    <Library />
-  </React.StrictMode>,
+  document.getElementById("root") as HTMLElement
 );
 
+// Render the App component instead of Home
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// Call the function to report web vitals
 reportWebVitals();
+
