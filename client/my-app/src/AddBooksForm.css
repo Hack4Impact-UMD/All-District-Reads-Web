@@ -1,229 +1,220 @@
 .add-books-form {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
-    margin: 20px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  margin: 20px auto;
 }
-
 
 .add-books-form input[type="text"],
 .add-books-form textarea {
-    width: calc(100% - 24px);
-    /* Adjusted width for padding */
-    padding: 12px;
-    margin: 10px 0;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
+  width: calc(100% - 24px);
+  /* Adjusted width for padding */
+  padding: 12px;
+  margin: 10px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
-
 
 .input-group input[type="text"]::placeholder,
 .add-books-form textarea::placeholder {
-    color: #ccc;
-    font-style: italic;
+  color: #ccc;
+  font-style: italic;
 }
 
-
 .add-books-form button {
-    background-color: #747272;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
+  background-color: #747272;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .add-books-form label {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
 }
 
 .add-books-form button[type="button"] {
-    /* Styling for 'Add Question' button */
-    background-color: #747272;
-    color: white;
-    padding: 14px 24px;
-    margin: 20px 0 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-
+  /* Styling for 'Add Question' button */
+  background-color: #747272;
+  color: white;
+  padding: 14px 24px;
+  margin: 20px 0 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .add-books-form button:hover {
-    opacity: 0.9;
-    background-color: #414141;
-    transition: 400ms;
+  opacity: 0.9;
+  background-color: #414141;
+  transition: 400ms;
 }
 
 .add-books-form .close {
-    margin-bottom: 20px;
-    /* Give some space between the close button and the form elements */
-    display: inline-block;
-    /* To enable margin-top to work */
-    cursor: pointer;
+  margin-bottom: 20px;
+  /* Give some space between the close button and the form elements */
+  display: inline-block;
+  /* To enable margin-top to work */
+  cursor: pointer;
 }
 
 .add-books-form .question-input {
-    display: flex;
-    margin-bottom: 10px;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .add-books-form .question-input input {
-    flex-grow: 1;
-    margin-right: 10px;
+  flex-grow: 1;
+  margin-right: 10px;
 }
 
 .input-group {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .upload-cover {
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    text-align: center;
-    color: #888;
-    padding: 20px;
-    margin-top: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  color: #888;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 .upload-cover:hover {
-    border-color: #777;
+  border-color: #777;
 }
 
 .chapter-questions {
-    background-color: #f6f6f6;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f6f6f6;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .question-item {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .question-item label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .question-item input[type="text"] {
-    margin-top: 5px;
-    /* Spacing above inputs within a question */
+  margin-top: 5px;
+  /* Spacing above inputs within a question */
 }
 
 /* Edit question modal styling */
 .edit-question-modal {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    /* Or absolute, depending on your needs */
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 500px;
-    /* Adjust the width as needed */
-    z-index: 10;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  /* Or absolute, depending on your needs */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  /* Adjust the width as needed */
+  z-index: 10;
 }
 
 .form-section {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .small-input {
-    max-width: 100%;
-    background-color: #f6f6f6;
-
+  max-width: 100%;
+  background-color: #f6f6f6;
 }
 
 .large-input {
-    width: 100%;
+  width: 100%;
 }
 
 /* Adjustments for the textarea to look larger */
 .form-textarea.large-input {
-    height: 150px;
-    background-color: #f6f6f6;
-    resize: vertical;
+  height: 150px;
+  background-color: #f6f6f6;
+  resize: vertical;
 }
-
 
 .chapter-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    /* space between the elements */
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  /* space between the elements */
+  margin-bottom: 20px;
 }
-
 
 /* Style for the number input and select dropdown */
 .chapter-controls input[type="number"],
 .chapter-controls .form-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* Style for the labels */
 .chapter-controls label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-    font-weight: 600;
-    /* Make labels bold */
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 600;
+  /* Make labels bold */
 }
-
 
 .number-of-chapters label,
 .select-chapter label {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .delete-question {
-    border: none;
-    background-color: transparent;
-    color: #747272;
-    font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 75%;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    /* Circular shape */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  background-color: transparent;
+  color: #747272;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 75%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  /* Circular shape */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .delete-question:hover {
-    background-color: #181817;
-    color: #ffffff;
+  background-color: #181817;
+  color: #ffffff;
 }
 
 .question-item {
-    position: relative;
-    margin-bottom: 15px;
-    padding-right: 40px;
+  position: relative;
+  margin-bottom: 15px;
+  padding-right: 40px;
 }
