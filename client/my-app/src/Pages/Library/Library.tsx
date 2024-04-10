@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AddBooksForm from "../Components/AddBooksForm";
-import "../Library.css";
-import { db } from "../config/firebase";
+import AddBooksForm from "../../Components/AddBooksForm";
+import "./Library.css";
+import { db } from "../../config/firebase";
 import {
   getDocs,
   collection,
