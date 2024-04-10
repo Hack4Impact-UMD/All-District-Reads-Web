@@ -35,13 +35,13 @@ const Library: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showDropdownMenu, setShowDropdownMenu] = useState<string | null>(null);
   const bookCollection = collection(db, "books");
-  const [view, setView] = useState<'grid' | 'list' | 'add'>('grid');
+  const [view, setView] = useState<"grid" | "list" | "add">("grid");
   const placeholderBook: Book = {
-    id: '',
-    title: '',
-    description: '',
+    id: "",
+    title: "",
+    description: "",
     chapters: [],
-    imageUrl: ''
+    imageUrl: "",
   };
 
   //load the books
@@ -106,20 +106,17 @@ const Library: React.FC = () => {
         </div>
       ))}
     </div>
-
   );
-
 
   const handleAddBookClick = () => {
     const tempId = `temp-${Date.now()}`; // Generate a temporary unique ID
     setActiveBook({
       id: tempId,
-      title: '',
-      description: '',
+      title: "",
+      description: "",
       chapters: [],
-      imageUrl: ''
+      imageUrl: "",
     });
-
   };
 
   //add it in baby
@@ -157,7 +154,7 @@ const Library: React.FC = () => {
   const saveBookData = async (bookData: Book) => {
     let savedBookId = bookData.id;
 
-    if (!bookData.id.startsWith('temp-')) {
+    if (!bookData.id.startsWith("temp-")) {
       // Existing book: Update logic here
     } else {
       // New book: Save logic here
@@ -173,13 +170,12 @@ const Library: React.FC = () => {
     // For a new book, replace the temporary ID with the permanent Firestore ID
     setBooks((prevBooks) =>
       prevBooks.map((book) =>
-        book.id === bookData.id ? { ...bookData, id: savedBookId } : book)
+        book.id === bookData.id ? { ...bookData, id: savedBookId } : book,
+      ),
     );
 
     // Additional logic to handle the state update...
   };
-
-
 
   const handleCloseModal = () => {
     setActiveBook(null);
@@ -208,9 +204,8 @@ const Library: React.FC = () => {
     setBooks(books.filter((book) => book.id !== id));
   };
 
-
   const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchQuery.toLowerCase())
+    book.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -227,87 +222,80 @@ const Library: React.FC = () => {
           />
           {/* View mode buttons */}
           <div className="view-buttons">
-            <button onClick={() => setView('grid')}>Grid View</button>
-            <button onClick={() => setView('list')}>List View</button>
+            <button onClick={() => setView("grid")}>Grid View</button>
+            <button onClick={() => setView("list")}>List View</button>
             <button onClick={addBookToLibrary}>Add Book</button>
           </div>
         </div>
       </div>
 
       <h2>Recently Added</h2>
-      {
-        view === 'grid' && (
-          <div className="book-grid">
-            {filteredBooks.map((book) => (
-              <div className="book-card" key={book.id}>
-                <div className="book-image-container">
-                  {book.imageUrl ? (
-                    <img src={book.imageUrl} alt={book.title} className="book-image" />
-                  ) : (
-                    <div className="book-placeholder">No Image Available</div>
-                  )}
-                </div>
-                <div className="book-title">{book.title || "No Title"}</div>
-                <div className="book-card-options">
-                  <button onClick={() => setActiveBook(book)}>Edit</button>
-                  <button onClick={() => deleteBook(book.id)}>Delete</button>
-                </div>
+      {view === "grid" && (
+        <div className="book-grid">
+          {filteredBooks.map((book) => (
+            <div className="book-card" key={book.id}>
+              <div className="book-image-container">
+                {book.imageUrl ? (
+                  <img
+                    src={book.imageUrl}
+                    alt={book.title}
+                    className="book-image"
+                  />
+                ) : (
+                  <div className="book-placeholder">No Image Available</div>
+                )}
               </div>
-            ))}
-          </div>
-        )
-      }
-
-      {
-        view === 'list' && (
-          <div className="book-list">
-            {filteredBooks.map((book) => (
-              <div key={book.id} className="book-list-item">
-                <div className="book-details">
-                  <div className="book-title">{book.title || "No Title"}</div>
-                  {/* Other details can be added here if needed */}
-                </div>
-                <div className="book-list-options">
-                  <button onClick={() => setActiveBook(book)}>Edit</button>
-                  <button onClick={() => deleteBook(book.id)}>Delete</button>
-                </div>
+              <div className="book-title">{book.title || "No Title"}</div>
+              <div className="book-card-options">
+                <button onClick={() => setActiveBook(book)}>Edit</button>
+                <button onClick={() => deleteBook(book.id)}>Delete</button>
               </div>
-            ))}
-          </div>
-        )
-      }
-
-
-      {
-        view === 'add' && (
-          <AddBooksForm
-            book={placeholderBook}
-            onSave={saveBookData}
-            onClose={handleCloseModal}
-          />
-        )
-      }
-
-      {
-        activeBook && (
-          <div className="modal show-modal">
-            <div className="modal-content">
-              <span className="close" onClick={handleCloseModal}>
-                &times;
-              </span>
-              <AddBooksForm
-                book={activeBook}
-                onSave={saveBookData}
-                onClose={handleCloseModal}
-              />
             </div>
-          </div>
-        )
-      }
-    </div >
+          ))}
+        </div>
+      )}
 
+      {view === "list" && (
+        <div className="book-list">
+          {filteredBooks.map((book) => (
+            <div key={book.id} className="book-list-item">
+              <div className="book-details">
+                <div className="book-title">{book.title || "No Title"}</div>
+                {/* Other details can be added here if needed */}
+              </div>
+              <div className="book-list-options">
+                <button onClick={() => setActiveBook(book)}>Edit</button>
+                <button onClick={() => deleteBook(book.id)}>Delete</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {view === "add" && (
+        <AddBooksForm
+          book={placeholderBook}
+          onSave={saveBookData}
+          onClose={handleCloseModal}
+        />
+      )}
+
+      {activeBook && (
+        <div className="modal show-modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCloseModal}>
+              &times;
+            </span>
+            <AddBooksForm
+              book={activeBook}
+              onSave={saveBookData}
+              onClose={handleCloseModal}
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
-
 
 export default Library;

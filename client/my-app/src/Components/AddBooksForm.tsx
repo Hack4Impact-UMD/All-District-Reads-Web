@@ -52,12 +52,12 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
         questions: ["Question"],
         answers: ["Answer"],
       },
-    ]
+    ],
   );
 
   const [deleteChapters, doDeleteChapters] = useState<string[]>([]); //store ids
   const [numberOfChapters, setNumberOfChapters] = useState(
-    chapters.length || 1
+    chapters.length || 1,
   ); //number of chapters
   const [activeChapter, setExactChapter] = useState(0); //which on you're on
   //when you submit, save whatever's in useState to array and database
@@ -89,7 +89,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
         "books",
         book.id,
         "Chapters",
-        chapter.chapterId
+        chapter.chapterId,
       );
       batch.set(
         chapterRef,
@@ -98,7 +98,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
           questions: chapter.questions,
           answers: chapter.answers,
         },
-        { merge: true }
+        { merge: true },
       ); // Use merge to not overwrite other fields
     });
     deleteChapters.forEach((chapterId) => {
@@ -120,11 +120,10 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
     }
   };
 
-
   const handleChapterQuestionChange = (
     chapterIndex: number,
     question: string,
-    questionIndex: number
+    questionIndex: number,
   ) => {
     const newChapters = [...chapters];
     // console.log(activeChapter);
@@ -137,7 +136,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
   const handleChapterAnswerChange = (
     chapterIndex: number,
     answer: string,
-    questionIndex: number
+    questionIndex: number,
   ) => {
     const newChapters = [...chapters];
     newChapters[chapterIndex].answers[questionIndex] = answer;
@@ -206,7 +205,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
 
   const deleteQuestion = async (
     chapterIndex: number,
-    questionIndex: number
+    questionIndex: number,
   ) => {
     const newChapters = chapters.map((chapter, index) => {
       if (index === chapterIndex) {
@@ -214,10 +213,10 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
         return {
           ...chapter,
           questions: chapter.questions.filter(
-            (_, qIndex) => qIndex !== questionIndex
+            (_, qIndex) => qIndex !== questionIndex,
           ),
           answers: chapter.answers.filter(
-            (_, aIndex) => aIndex !== questionIndex
+            (_, aIndex) => aIndex !== questionIndex,
           ),
         };
       }
@@ -228,7 +227,7 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
   };
 
   let activeChapterContent = chapters.find(
-    (chapter) => chapter.chapterNumber === activeChapter
+    (chapter) => chapter.chapterNumber === activeChapter,
   );
   return (
     <div className="add-books-form">
@@ -264,13 +263,11 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
             onChange={(e) => setDescription(e.target.value)}
             className="form-textarea large-input"
             placeholder="Book description here..."
-
           />
         </label>
         <div className="chapter-controls">
           {/* Number of Chapters input */}
           <div className="number-of-chapters">
-
             <label>
               Number of Chapters:
               <input //how many
@@ -301,7 +298,6 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
               ))}
             </select>
           </div>
-
         </div>
         {activeChapterContent && (
           <div className="chapter-questions">
@@ -313,11 +309,13 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
                   <input
                     type="text"
                     value={question}
-                    onChange={(e) => handleChapterQuestionChange(
-                      activeChapter - 1,
-                      e.target.value,
-                      questionIndex
-                    )}
+                    onChange={(e) =>
+                      handleChapterQuestionChange(
+                        activeChapter - 1,
+                        e.target.value,
+                        questionIndex,
+                      )
+                    }
                     placeholder="Example"
                     className="form-input"
                   />
@@ -327,24 +325,27 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
                   <input
                     type="text"
                     value={activeChapterContent?.answers[questionIndex]}
-                    onChange={(e) => handleChapterAnswerChange(
-                      activeChapter - 1,
-                      e.target.value,
-                      questionIndex
-                    )}
+                    onChange={(e) =>
+                      handleChapterAnswerChange(
+                        activeChapter - 1,
+                        e.target.value,
+                        questionIndex,
+                      )
+                    }
                     placeholder="Example"
                     className="form-input"
                   />
                 </label>
                 <button
                   type="button"
-                  onClick={() => deleteQuestion(activeChapter - 1, questionIndex)}
+                  onClick={() =>
+                    deleteQuestion(activeChapter - 1, questionIndex)
+                  }
                   className="delete-question"
                 >
                   X
                 </button>
               </div>
-
             ))}
             <button
               type="button"
@@ -354,13 +355,12 @@ const AddBooksForm: React.FC<AddBookFormProps> = ({
               Add Question
             </button>
           </div>
-        )
-        }
+        )}
         <button type="submit" className="save-button">
           Publish
         </button>
-      </form >
-    </div >
+      </form>
+    </div>
   );
 };
 
