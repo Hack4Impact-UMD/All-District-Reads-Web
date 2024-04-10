@@ -67,9 +67,9 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          Hello world!
-        </header>
+        {/* <header className="App-header">
+          Header!
+        </header> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
