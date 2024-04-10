@@ -1,4 +1,3 @@
-// Dashboard.js
 import React from "react";
 // recharts is something I found from the internet but offers some nice charts we can use!
 // to install it, use "npm install recharts"
@@ -14,7 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import "../Dashboard.css";
+import "./Dashboard.css";
 
 // Dummy data for visualization (we can change this later on.)
 const data = {

@@ -10,8 +10,8 @@ import {
   initializeApp,
   getApp,
 } from "firebase/app";
-import firebaseConfig from "../config/firebase"; // Make sure to provide the correct path to your Firebase config
-import { createAdminUser } from "../backend/cloudFunctionCalls";
+import firebaseConfig from "../../config/firebase"; // Make sure to provide the correct path to your Firebase config
+import { createAdminUser } from "../../backend/cloudFunctionCalls";
 //import '../Login.css';
 
 // Initialize Firebase app

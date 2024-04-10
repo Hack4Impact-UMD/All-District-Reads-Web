@@ -13,6 +13,9 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { Dayjs } from "dayjs";
+import ReadingScheduleBottom from './ReadingScheduleBottom';
+
+
 
 interface ReadingScheduleProps {}
 
@@ -141,7 +144,9 @@ const ReadingSchedule = (props: ReadingScheduleProps) => {
         />
       </div>
       <Button className={styles.button}>Save Chapter</Button>
+      <ReadingScheduleBottom />
     </div>
+    
   );
 };
 

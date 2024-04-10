@@ -1,7 +1,6 @@
 import {getFunctions, httpsCallable} from 'firebase/functions';
 import { initializeApp } from "firebase/app";
 import { getAuth, sendPasswordResetEmail } from "@firebase/auth";
-import { getFunctions, httpsCallable } from "firebase/functions";
 
 export function createAdminUser(email: string): Promise<void> {
   return new Promise((resolve, reject) => {
