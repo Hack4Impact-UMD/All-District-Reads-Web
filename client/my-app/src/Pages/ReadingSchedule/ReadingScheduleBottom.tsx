@@ -70,7 +70,22 @@ const ReadingScheduleBottom: React.FC = () => {
                             <div className="modal-content">
                                 <span className="close" onClick={handleCloseModal}>&times;</span>
                                 <h2>Edit Chapter Details</h2>
-                                {/* Form for editing chapter details */}
+                                <label>
+                                Chapter Number:
+                                <input type="text" value={selectedChapter.number} onChange={(e) => setSelectedChapter({ ...selectedChapter, number: parseInt(e.target.value) })} />
+                            </label>
+                            <label>
+                                Chapter Name:
+                                <input type="text" value={selectedChapter.name} onChange={(e) => setSelectedChapter({ ...selectedChapter, name: e.target.value })} />
+                            </label>
+                            <label>
+                                Date:
+                                <input type="text" value={selectedChapter.date} onChange={(e) => setSelectedChapter({ ...selectedChapter, date: e.target.value })} />
+                            </label>
+                            <label>
+                                Number of Questions:
+                                <input type="text" value={selectedChapter.numQuestions} onChange={(e) => setSelectedChapter({ ...selectedChapter, numQuestions: parseInt(e.target.value) })} />
+                            </label>
                                 <button onClick={handleSaveChanges}>Save Changes</button>
                             </div>
                         </div>
