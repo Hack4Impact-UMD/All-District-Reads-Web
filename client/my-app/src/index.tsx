@@ -13,9 +13,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App />
+    <App />
+    {/* <Library /> */}
   </React.StrictMode>
 );
 
 // Call the function to report web vitals
 reportWebVitals();
-
