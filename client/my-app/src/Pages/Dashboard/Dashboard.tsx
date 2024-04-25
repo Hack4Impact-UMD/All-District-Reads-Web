@@ -95,20 +95,20 @@
 import { Container } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 const Dashboard = () => {
-  // const [retoolEmbedUrl, setRetoolEmbedUrl] = useState("");
-  // const retoolAppName = "Analytics";
+  const [retoolEmbedUrl, setRetoolEmbedUrl] = useState("");
+  const retoolAppName = "Analytics";
   // useEffect(() => {
   //   const options = {
   //     method: "POST",
   //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ userJwt, retoolAppName}),
+  //     body: JSON.stringify({ userJwt, retoolAppName }), //pass in the userJwt
   //   };
   //   fetch("/api/embedUrl", options)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setRetoolEmbedUrl(data.embedUrl);
   //     });
-  // }, [retoolAppName]);
+  // }, [retoolAppName]); //everything in [] can be accessed within useEffect
 
   return (
     <Container>
@@ -120,3 +120,5 @@ const Dashboard = () => {
     </Container>
   );
 };
+
+export default Dashboard;
