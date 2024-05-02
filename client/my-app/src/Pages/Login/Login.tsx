@@ -57,7 +57,7 @@ function Login() {
   };
 
   const handleRegister = async () => {
-    const auth = getAuth(firebaseApp);
+    const auth = getAuth(firebaseApp).setCustomUserClaims();
 
     try {
       const userCredential = await createUserWithEmailAndPassword(

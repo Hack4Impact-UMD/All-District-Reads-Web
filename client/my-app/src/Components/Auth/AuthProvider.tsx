@@ -38,10 +38,13 @@ export const AuthProvider = ({ children }: Props): React.ReactElement => {
     const auth = getAuth(app);
     onIdTokenChanged(auth, (newUser) => {
       setUser(newUser);
+      console.log(user);
+      console.log(auth);
       if (newUser != null) {
         newUser
           .getIdTokenResult()
           .then((newToken) => {
+            console.log(newToken);
             setToken(newToken);
           })
           .catch(() => {});
