@@ -1,3 +1,14 @@
+h1{
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+}
+
+h2{
+  font-weight: 30px;
+  font-size: 20px;
+}
+
+
 .modal {
   display: none;
   position: fixed;
@@ -55,12 +66,9 @@
 
 .library-container {
   grid-template-columns: repeat(auto-fill, minmax(300px, 10fr));
-  /* adjust minmax for your card size */
-  gap: 20px;
-  /* adjust for your spacing */
-  padding: 20px;
-  background-color: #f4f4f4;
-  /* adjust to match Figma color */
+  max-height: auto;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: black;
 }
 
 .book-grid {
@@ -70,17 +78,17 @@
   /* This creates space between the books */
   padding: 20px;
   flex-grow: 1;
+  margin-right: 3%;
 }
 
 .book-card {
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* Stack image and text vertically */
   transition: box-shadow 0.3s ease;
 }
 
@@ -120,6 +128,9 @@
   white-space: inherit;
   margin: 10px 0;
   padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Style for the play button inside book cards */
@@ -143,22 +154,29 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-right: 20px;
+  padding: 10px;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  background-color: #0071ba;
+  color: white;
 }
 
 .search-bar {
-  padding: 10px;
   margin-bottom: 20px;
   margin-left: 130px;
-  border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: #013e67;
+  
+  color: white;
+  width: 300px;
+  height: 20px;
 }
 
 .book-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 270px;
   max-width: 100%;
   margin: 10px;
 }
@@ -169,6 +187,7 @@
   top: 5px;
   right: 5px;
   z-index: 10;
+  color: black;
 }
 
 .edit-book {
@@ -216,12 +235,31 @@
   display: block;
 }
 
+
 .view-buttons {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 890px;
   /* Adjust as needed */
-  margin-left: auto;
+  padding-left: 2.5%;
+  background-color: black;
+  color: white;
   /* This will push the buttons to the end of the search bar */
+}
+
+.view-button{
+  height: 30px;
+  font-size: 12px;
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.icon{
+  color: black;
 }
 
 .view-buttons button {
@@ -237,6 +275,10 @@
 
 .view-buttons button:hover {
   background-color: #ccc;
+}
+
+.book-details{
+  color: white;
 }
 
 .book-list-item {

@@ -11,8 +11,8 @@ import {
   getApp,
 } from "firebase/app";
 import firebaseConfig from "../../config/firebase"; // Make sure to provide the correct path to your Firebase config
-import { createAdminUser } from "../../backend/cloudFunctionCalls";
-//import '../Login.css';
+import './Login.css'; // Import the updated CSS file
+import { useNavigate } from "react-router-dom";
 
 // Initialize Firebase app
 let firebaseApp: FirebaseApp;
@@ -27,12 +27,9 @@ function Login() {
   const [loginPassword, setLoginPassword] = useState("");
   const [loginButtonClicked, setLoginButtonClicked] = useState(false); // State to track if login button is clicked
   const [loginError, setLoginError] = useState(""); // State to store login error message
-  const [registrationEmail, setRegistrationEmail] = useState("");
-  const [registrationPassword, setRegistrationPassword] = useState("");
-  const [registrationButtonClicked, setRegistrationButtonClicked] =
-    useState(false); // State to track if registration button is clicked
-  const [registrationError, setRegistrationError] = useState(""); // State to store registration error message
   const [currentPage, setCurrentPage] = useState<"home" | "wrong" | null>(null); // State to track current page
+  const navigate = useNavigate();
+  const goToHome = () => navigate('/home');
 
   const handleLogin = async () => {
     const auth = getAuth(firebaseApp);
@@ -49,32 +46,11 @@ function Login() {
       setLoginError("");
       setLoginEmail(""); // Clear email input
       setLoginPassword(""); // Clear password input
+      goToHome();
     } catch (error: any) {
       setCurrentPage("wrong");
       console.error("Login error:", error.message);
       setLoginError("Login error: " + error.message);
-    }
-  };
-
-  const handleRegister = async () => {
-    const auth = getAuth(firebaseApp);
-
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        registrationEmail,
-        registrationPassword,
-      );
-      await createAdminUser(registrationEmail);
-      console.log("Registration successful:", userCredential.user);
-      setRegistrationButtonClicked(true); // Set registrationButtonClicked to true when registration button is clicked
-      setRegistrationError("");
-      setRegistrationEmail(""); // Clear email input
-      setRegistrationPassword(""); // Clear password input
-      // Optionally, you can redirect to another page after successful registration
-    } catch (error: any) {
-      console.error("Registration error:", error.message);
-      setRegistrationError("Registration error: " + error.message);
     }
   };
 
@@ -90,42 +66,34 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={loginEmail}
-        onChange={(e) => setLoginEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={loginPassword}
-        onChange={(e) => setLoginPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
-      {loginError && <p>{loginError}</p>}
-      {loginButtonClicked && <p>Login button clicked!</p>}
-      {renderPage()}
-      <h2>Register</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={registrationEmail}
-        onChange={(e) => setRegistrationEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={registrationPassword}
-        onChange={(e) => setRegistrationPassword(e.target.value)}
-      />
-      <button onClick={handleRegister}>Register</button>
-      {registrationError && <p>{registrationError}</p>}{" "}
-      {/* Display registration error message */}
-      {registrationButtonClicked && <p>Registration successful!</p>}{" "}
-      {/* Render message if registration is successful */}
+    <div className="container">
+      <div className="login-container">
+        <div className="image-container">
+          <div className="login-image" />
+        </div>
+        <div className="form-container">
+          <img src="https://alldistrictreads.org/wp-content/uploads/2023/07/All-District-Reads.png" alt="navbar-logo" className="adr-logo" />
+          <h3>Login</h3>
+          <hr className="separator" />
+
+          <input
+            type="email"
+            placeholder="Email"
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
+            className="input-field"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
+            className="input-field"
+          />
+          <button className="login-button" onClick={handleLogin}>Login</button>
+          {renderPage()}
+        </div>
+      </div>
     </div>
   );
 }

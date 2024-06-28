@@ -1,6 +1,6 @@
 import {getFunctions, httpsCallable} from 'firebase/functions';
-import { initializeApp } from "firebase/app";
-import { getAuth, sendPasswordResetEmail } from "@firebase/auth";
+import { UserType } from '../types/types';
+
 
 export function createAdminUser(email: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -38,7 +38,7 @@ export function createADRStaffUser(
     createADRStaffCloudFunction({
       email: email,
       name: "test",
-      numChildren: 2,
+      numChildren: "",
       schoolId: "",
       schoolDistrictId: "",
       userType: "ADRStaff",
@@ -53,6 +53,7 @@ export function createADRStaffUser(
   });
 }
 
+
 export function createSchoolStaffUser(
   email: string
 ): Promise<void> {
@@ -63,7 +64,7 @@ export function createSchoolStaffUser(
     createADRStaffCloudFunction({
       email: email,
       name: "test",
-      numChildren: 2,
+      numChildren: "",
       schoolId: "",
       schoolDistrictId: "",
       userType: "SchoolStaff",

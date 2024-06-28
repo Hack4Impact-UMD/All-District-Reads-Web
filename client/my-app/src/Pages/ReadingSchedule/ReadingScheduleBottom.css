@@ -1,55 +1,62 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it's above other content */
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: gray;
+    height: auto;
 }
 
-.modal {
+h1 {
+    color: white;
+}
+
+.assignment-container{
     background-color: white;
-    padding: 20px;
+    padding: 1%;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: auto; /* Adjust based on content */
-    height: auto; /* Adjust based on content */
+
+}
+.assignment{
+    background-color:#0071ba;
+    border-radius: 7px;
+    color: white;
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    padding-left: 5px;
+    justify-content: space-between;
 }
 
-.modal-content {
-    max-width: 400px; /* Adjust as needed */
-}
-
-.close {
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-}
-
-.assignedChapters table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.assignedChapters th, .assignedChapters td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-}
-
-.editButton {
-    background-color: #f0f0f0;
+.button {
+    background-color: #0071ba;
+    color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
     cursor: pointer;
+    border-radius: 4px;
 }
 
-.editButton:hover {
-    background-color: #e0e0e0;
+.icon-button {
+    background: none;
+    font-size: 20px;
+}
+
+.icon {
+    color: white;
+}
+
+
+.save-book {
+    display: block;
+    margin-top: 20px;
+}
+
+
+.edit, .delete {
+    background: none;
 }

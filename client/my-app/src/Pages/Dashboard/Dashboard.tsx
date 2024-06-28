@@ -1,94 +1,65 @@
-import React from "react";
-// recharts is something I found from the internet but offers some nice charts we can use!
-// to install it, use "npm install recharts"
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  PieChart,
-  Pie,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import "./Dashboard.css";
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line } from 'recharts';
+import './Dashboard.css';
 
-// Dummy data for visualization (we can change this later on.)
-const data = {
-  totalDownloads: 5000,
-  usersLast7Days: 1020,
-  surveyResponses: [
-    { name: "Period 1", responses: 400 },
-    { name: "Period 2", responses: 600 },
-    { name: "Period 3", responses: 800 },
-  ],
-  triviaResponses: { completed: 75, incomplete: 25 }, // in percentages :P
-  sessionsByType: [
-    { name: "Email", value: 400 },
-    { name: "Referral", value: 300 },
-    { name: "Direct", value: 300 },
-    { name: "Social", value: 200 },
-    { name: "Organic Search", value: 100 },
-  ],
-};
+// Sample data for the charts
+const surveyData = [
+  { question: 'Do you feel as though your child...', no: 40, yes: 30, maybe: 30 },
+  // Add more data as needed
+];
 
-const Dashboard = () => {
+const triviaData = [
+  { chapter: 'Chapter One', percentage: 100 },
+  { chapter: 'Chapter Two', percentage: 80 },
+  { chapter: 'Chapter Three', percentage: 60 },
+  { chapter: 'Chapter Four', percentage: 40 },
+  { chapter: 'Chapter Five', percentage: 20 },
+  // Add more data as needed
+];
+
+function Dashboard() {
   return (
-    <div className="dashboardContainer">
-      <h1>ADR Web Analytics Dashboard</h1>
-
-      <div className="topMetrics">
-        <div className="metricBox">
-          <h2>Total Downloads</h2>
-          <p>{data.totalDownloads}</p>
-        </div>
-        <div className="metricBox">
-          <h2>Users in Past 7 Days</h2>
-          <p>{data.usersLast7Days}</p>
-        </div>
-        <div className="metricBox">
-          <h2>Survey Responses</h2>
-          <BarChart width={150} height={40} data={data.surveyResponses}>
-            <Bar dataKey="responses" fill="#8884d8" />
-          </BarChart>
-        </div>
-        <div className="metricBox">
-          <h2>Trivia Responses</h2>
-          <p>{data.triviaResponses.completed}% Completed</p>
+    <div className="dashboard">
+      <div className="header">
+        <h1>ANALYTICS</h1>
+        <div className="dropdowns">
+          <select>
+            <option>MCPS</option>
+          </select>
+          <select>
+            <option>Fall 2023</option>
+          </select>
+          <select>
+            <option>A Wrinkle in Time</option>
+          </select>
         </div>
       </div>
-
-      <div className="chartSection">
-        <ResponsiveContainer width="50%" height={300}>
-          <BarChart data={data.surveyResponses}>
+      <div className="content">
+        <div className="chart-box">
+          <h2>Montgomery County Public Schools</h2>
+          <h3>Survey Responses</h3>
+          <BarChart width={600} height={300} data={surveyData}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="question" />
             <YAxis />
             <Tooltip />
-            <Legend />
-            <Bar dataKey="responses" fill="#82ca9d" />
+            <Bar dataKey="yes" stackId="a" fill="#82ca9d" />
+            <Bar dataKey="no" stackId="a" fill="#8884d8" />
+            <Bar dataKey="maybe" stackId="a" fill="#ffc658" />
           </BarChart>
-        </ResponsiveContainer>
-        <ResponsiveContainer width="50%" height={300}>
-          <PieChart>
-            <Pie
-              data={data.sessionsByType}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={100}
-              fill="#8884d8"
-            />
+        </div>
+        <div className="chart-box">
+          <h3>Trivia Responses</h3>
+          <LineChart width={600} height={300} data={triviaData}>
+            <XAxis dataKey="chapter" />
+            <YAxis />
             <Tooltip />
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
+            <Line type="monotone" dataKey="percentage" stroke="#8884d8" />
+          </LineChart>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default Dashboard;

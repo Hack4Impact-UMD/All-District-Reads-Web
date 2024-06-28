@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddBooksForm from "../../Components/AddBooksForm";
 import "./Library.css";
 import { db } from "../../config/firebase";
+import '@fortawesome/fontawesome-free/css/all.css'; 
 import {
   getDocs,
   collection,
@@ -12,6 +13,8 @@ import {
   doc,
   writeBatch,
 } from "firebase/firestore";
+import Navbar from "../../Components/Navbar/Navbar";
+
 
 //parallels the database, honestly don't need to have lol
 type ChapterQuestions = {
@@ -33,7 +36,6 @@ const Library: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [activeBook, setActiveBook] = useState<Book | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [showDropdownMenu, setShowDropdownMenu] = useState<string | null>(null);
   const bookCollection = collection(db, "books");
   const [view, setView] = useState<"grid" | "list" | "add">("grid");
   const placeholderBook: Book = {
@@ -74,8 +76,12 @@ const Library: React.FC = () => {
           }
 
           // Push the question and answer into the chapter
-          chapterMap[chapterNumber].questions.push(...chapterData.questions); // Assuming these are arrays
-          chapterMap[chapterNumber].answers.push(...chapterData.answers);
+          if (Array.isArray(chapterData.questions)) {
+            chapterMap[chapterNumber].questions.push(...chapterData.questions);
+        }
+        if (Array.isArray(chapterData.answers)) {
+            chapterMap[chapterNumber].answers.push(...chapterData.answers);
+        }
         });
 
         // Convert the map into an array of ChapterQuestions
@@ -119,7 +125,6 @@ const Library: React.FC = () => {
     });
   };
 
-  //add it in baby
   const addBookToLibrary = async () => {
     const chId = Date.now().toString();
     const id = Date.now().toString();
@@ -148,8 +153,6 @@ const Library: React.FC = () => {
       answers: ["Answer"],
     });
     setBooks([newBook, ...books]);
-    // console.log(newBook);
-    // console.log(temp);
   };
   const saveBookData = async (bookData: Book) => {
     let savedBookId = bookData.id;
@@ -211,25 +214,35 @@ const Library: React.FC = () => {
   return (
     <div className="library-container">
       <div className="library-header">
-        <h1>Library</h1>
+        <h1>Library of Books</h1>
         <div className="search-bar-container">
           <input
             type="text"
-            placeholder="Search for a book"
+            placeholder="Search Library..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-bar"
           />
           {/* View mode buttons */}
-          <div className="view-buttons">
-            <button onClick={() => setView("grid")}>Grid View</button>
-            <button onClick={() => setView("list")}>List View</button>
-            <button onClick={addBookToLibrary}>Add Book</button>
-          </div>
+          
         </div>
       </div>
 
-      <h2>Recently Added</h2>
+      <div className="view-buttons">
+          <h2>Recently Added</h2>
+          <div className="buttons">
+            <button className='view-button' onClick={() => setView("grid")} title="Grid View">
+              <i className="fa fa-th-large"></i>  {/* Grid View Icon */}
+            </button>
+            <button className='view-button' onClick={() => setView("list")} title="List View">
+              <i className="fa fa-list"></i>  {/* List View Icon */}
+            </button>
+            <button className='view-button' onClick={addBookToLibrary} title="Add Book">
+              <i className="fa fa-plus"></i>  {/* Add Book Icon */}
+            </button>
+          </div>
+      </div>
+
       {view === "grid" && (
         <div className="book-grid">
           {filteredBooks.map((book) => (
@@ -247,8 +260,8 @@ const Library: React.FC = () => {
               </div>
               <div className="book-title">{book.title || "No Title"}</div>
               <div className="book-card-options">
-                <button onClick={() => setActiveBook(book)}>Edit</button>
-                <button onClick={() => deleteBook(book.id)}>Delete</button>
+                <button onClick={() => setActiveBook(book)} className="edit-book"><i className="icon">&#x270E;</i></button>
+                <button onClick={() => deleteBook(book.id)} className="delete-book"><i className="icon fa fa-trash-o"></i></button>
               </div>
             </div>
           ))}
