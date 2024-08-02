@@ -11,7 +11,7 @@ import {
   getApp,
 } from "firebase/app";
 import firebaseConfig from "../../config/firebase"; // Make sure to provide the correct path to your Firebase config
-import './Login.css'; // Import the updated CSS file
+import "./Login.css"; // Import the updated CSS file
 import { useNavigate } from "react-router-dom";
 
 // Initialize Firebase app
@@ -29,7 +29,7 @@ function Login() {
   const [loginError, setLoginError] = useState(""); // State to store login error message
   const [currentPage, setCurrentPage] = useState<"home" | "wrong" | null>(null); // State to track current page
   const navigate = useNavigate();
-  const goToHome = () => navigate('/home');
+  const goToHome = () => navigate("/home");
 
   const handleLogin = async () => {
     const auth = getAuth(firebaseApp);
@@ -66,13 +66,17 @@ function Login() {
   };
 
   return (
-    <div className="container">
+    <div className="login-outer-container">
       <div className="login-container">
         <div className="image-container">
           <div className="login-image" />
         </div>
-        <div className="form-container">
-          <img src="https://alldistrictreads.org/wp-content/uploads/2023/07/All-District-Reads.png" alt="navbar-logo" className="adr-logo" />
+        <div className="login-form-container">
+          <img
+            src="https://alldistrictreads.org/wp-content/uploads/2023/07/All-District-Reads.png"
+            alt="navbar-logo"
+            className="adr-logo"
+          />
           <h3>Login</h3>
           <hr className="separator" />
 
@@ -81,16 +85,18 @@ function Login() {
             placeholder="Email"
             value={loginEmail}
             onChange={(e) => setLoginEmail(e.target.value)}
-            className="input-field"
+            className="login-input-field"
           />
           <input
             type="password"
             placeholder="Password"
             value={loginPassword}
             onChange={(e) => setLoginPassword(e.target.value)}
-            className="input-field"
+            className="login-input-field"
           />
-          <button className="login-button" onClick={handleLogin}>Login</button>
+          <button className="login-button" onClick={handleLogin}>
+            Login
+          </button>
           {renderPage()}
         </div>
       </div>

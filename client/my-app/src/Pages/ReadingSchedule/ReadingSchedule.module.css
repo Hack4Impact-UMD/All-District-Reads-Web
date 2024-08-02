@@ -24,7 +24,6 @@
 }
 
 .select {
-  width: 300px;
   background-color: #e6e6e6;
   font-weight: bold;
   text-align: left;
@@ -34,7 +33,7 @@
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin: 10%;
+  margin: 8%;
 }
 
 .title {
@@ -84,7 +83,7 @@
 
 .chapterQuestionDatabase {
   text-align: left;
-  margin: 10%;
+  margin: 8%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -99,7 +98,7 @@
   width: 30%; /* Adjust this value to control the width of the container */
 }
 
-.selectedReadingPeriodConatiner{
+.selectedReadingPeriodConatiner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,9 +118,9 @@
   border-radius: 10px;
   align-items: center;
   overflow: auto;
-  padding-left: 10px;
+  padding-left: 8px;
   padding-top: 10px;
-  padding-right: 10px;
+  padding-right: 8px;
 }
 
 .question {
@@ -135,10 +134,11 @@
 }
 
 .save-chapter {
-  background-color: #636363;
+  background-color: #75c74c;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 40px;
 }
 
 .saveButtonContainer {

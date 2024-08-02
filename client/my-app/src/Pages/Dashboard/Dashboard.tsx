@@ -1,19 +1,33 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line } from 'recharts';
-import './Dashboard.css';
+import React from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  LineChart,
+  Line,
+} from "recharts";
+import "./Dashboard.css";
 
 // Sample data for the charts
 const surveyData = [
-  { question: 'Do you feel as though your child...', no: 40, yes: 30, maybe: 30 },
+  {
+    question: "Do you feel as though your child...",
+    no: 40,
+    yes: 30,
+    maybe: 30,
+  },
   // Add more data as needed
 ];
 
 const triviaData = [
-  { chapter: 'Chapter One', percentage: 100 },
-  { chapter: 'Chapter Two', percentage: 80 },
-  { chapter: 'Chapter Three', percentage: 60 },
-  { chapter: 'Chapter Four', percentage: 40 },
-  { chapter: 'Chapter Five', percentage: 20 },
+  { chapter: "Chapter One", percentage: 100 },
+  { chapter: "Chapter Two", percentage: 80 },
+  { chapter: "Chapter Three", percentage: 60 },
+  { chapter: "Chapter Four", percentage: 40 },
+  { chapter: "Chapter Five", percentage: 20 },
   // Add more data as needed
 ];
 

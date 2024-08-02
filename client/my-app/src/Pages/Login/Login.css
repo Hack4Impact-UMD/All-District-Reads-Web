@@ -1,46 +1,15 @@
 /* Login.css */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-}
-
-.container {
+.login-outer-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: #b3dcfd;
-  padding-top: 7%;
-  padding-bottom: 7%;
-  min-height: 100vh; /* Ensure the container takes at least the full viewport height */
-  position: relative;
-}
-
-.container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  opacity: 0.5; /* Adjust this value to control the opacity of the background */
-  z-index: -1; /* Places the pseudo-element behind the content of the container */
-}
-
-.login-container {
-  display: flex;
-  flex-direction: row;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  max-width: 800px;
-  width: 100%; /* Ensure the container takes the full width up to the max-width */
-  z-index: 1; /* Ensure the login container is above the pseudo-background */
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
 }
 
 .image-container {
@@ -65,102 +34,61 @@
   text-align: center;
 }
 
-.form-container {
-  flex: 1;
+.login-form-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-}
-
-.form-container h2 {
-  align-self: center;
-  font-size: 24px;
-  color: #333;
-}
-
-.form-container input {
-  width: 100%; /* Ensure the input fields take the full width of the container */
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.form-container button {
-  width: 100%; /* Ensure the button takes the full width of the container */
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 16px;
-  color: white;
-  background-color: #0071ba;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.form-container button.google-login {
-  background-color: #db4437;
-}
-
-.form-container a {
-  color: #5a67d8;
-  text-decoration: none;
-}
-
-.form-container a:hover {
-  text-decoration: underline;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 7%;
+  padding-bottom: 7%;
+  width: 60%;
 }
 
 .adr-logo {
-  height: 50%;
-  width: auto;
+  width: 40%;
   align-items: center;
-  margin-bottom: 15px;
 }
 
-h3{
-  margin-bottom: 5%;
-  color: #515151;
+h3 {
+  color: #616161;
 }
 
 .separator {
-  width: 80%; /* Adjust the width of the separator line */
+  width: 60%; /* Adjust the width of the separator line */
   border: 0;
   border-top: 1px solid #0071ba;
   margin-bottom: 20px; /* Add some margin below the separator */
 }
 
-.input-field {
-  width: 100%; /* Ensure the input fields take the full width of the container */
-  margin-bottom: 15px;
-  padding: 10px;
+.login-input-field {
+  width: 60%;
+  padding: 2%;
   font-size: 16px;
-  border: 1px solid #0071ba; /* Change the border color to blue */
-  border-radius: 4px;
-  outline: none; /* Remove the default outline */
-}
-
-.input-field{
-  border: 5px solid #0071ba; /* Change the border color to blue */
-  border-color: #005f9e; /* Change the border color to a darker blue when focused */
+  cursor: pointer;
   box-shadow: 2px 2px 5px rgb(47, 47, 48); /* Add a blue shadow when focused */
+  border-radius: 4px;
+  display: flex;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: none;
 }
 
-.input-field::placeholder {
+.login-input-field::placeholder {
   color: #75b2da;
 }
 
 .login-button {
-  width: 20%; /* Ensure the button takes the full width of the container */
-  margin-bottom: 15px;
-  padding: 10px;
+  width: 40%; /* Ensure the button takes the full width of the container */
+  margin-bottom: 10%;
+  padding: 2%;
   font-size: 16px;
   color: white;
-  border: 5px solid #0071ba;
-  background: linear-gradient(90deg, #0071ba, #ffffff); /* Add gradient background */
+  border: none;
+  background: linear-gradient(
+    90deg,
+    #0071ba,
+    #ffffff
+  ); /* Add gradient background */
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgb(47, 47, 48); /* Add a blue shadow when focused */
   cursor: pointer;
@@ -168,5 +96,9 @@ h3{
 }
 
 .login-button:hover {
-  background: linear-gradient(90deg, #005f9e, #e0e0e0); /* Darker gradient on hover */
+  background: linear-gradient(
+    90deg,
+    #005f9e,
+    #e0e0e0
+  ); /* Darker gradient on hover */
 }

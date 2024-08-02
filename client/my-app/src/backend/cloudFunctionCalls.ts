@@ -1,6 +1,5 @@
-import {getFunctions, httpsCallable} from 'firebase/functions';
-import { UserType } from '../types/types';
-
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { UserType } from "../types/types";
 
 export function createAdminUser(email: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -16,7 +15,7 @@ export function createAdminUser(email: string): Promise<void> {
       schoolId: "",
       schoolDistrictId: "",
       numChildren: "",
-      userType: "ADRAdmin"
+      userType: "ADRAdmin",
     })
       .then(async () => {
         resolve();
@@ -28,38 +27,38 @@ export function createAdminUser(email: string): Promise<void> {
   });
 }
 
-export function createADRStaffUser(
-  email: string
-): Promise<void> {
+export function createADRStaffUser(email: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const functions = getFunctions();
-    const createADRStaffCloudFunction = httpsCallable(functions, "createADRStaffUser");
+    const createADRStaffCloudFunction = httpsCallable(
+      functions,
+      "createADRStaffUser",
+    );
 
     createADRStaffCloudFunction({
       email: email,
       name: "test",
       numChildren: "",
-      schoolId: "",
       schoolDistrictId: "",
       userType: "ADRStaff",
     })
       .then(async () => {
         resolve();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
         reject(error);
       });
   });
 }
 
-
-export function createSchoolStaffUser(
-  email: string
-): Promise<void> {
+export function createSchoolStaffUser(email: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const functions = getFunctions();
-    const createADRStaffCloudFunction = httpsCallable(functions, "createSchoolStaffUser");
+    const createADRStaffCloudFunction = httpsCallable(
+      functions,
+      "createSchoolStaffUser",
+    );
 
     createADRStaffCloudFunction({
       email: email,
@@ -72,7 +71,7 @@ export function createSchoolStaffUser(
       .then(async () => {
         resolve();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
         reject(error);
       });

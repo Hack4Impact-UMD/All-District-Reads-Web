@@ -1,5 +1,5 @@
 .dashboard {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   padding: 20px;
   background-color: #f0f0f0;
   color: #333;
@@ -25,11 +25,12 @@
 .content .chart-box {
   background: #fff;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
-.chart-box h2, .chart-box h3 {
+.chart-box h2,
+.chart-box h3 {
   color: #555;
   margin-bottom: 10px;
 }
