@@ -171,8 +171,8 @@ const Library: React.FC = () => {
     // For a new book, replace the temporary ID with the permanent Firestore ID
     setBooks((prevBooks) =>
       prevBooks.map((book) =>
-        book.id === bookData.id ? { ...bookData, id: savedBookId } : book,
-      ),
+        book.id === bookData.id ? { ...bookData, id: savedBookId } : book
+      )
     );
 
     // Additional logic to handle the state update...
@@ -206,7 +206,7 @@ const Library: React.FC = () => {
   };
 
   const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    book.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -314,16 +314,14 @@ const Library: React.FC = () => {
 
       {activeBook && (
         <div className="modal show-modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <AddBooksForm
-              book={activeBook}
-              onSave={saveBookData}
-              onClose={handleCloseModal}
-            />
-          </div>
+          <span className="close" onClick={handleCloseModal}>
+            &times;
+          </span>
+          <AddBooksForm
+            book={activeBook}
+            onSave={saveBookData}
+            onClose={handleCloseModal}
+          />
         </div>
       )}
     </div>
