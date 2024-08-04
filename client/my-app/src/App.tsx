@@ -15,6 +15,13 @@ import ReadingSchedule from "./Pages/ReadingSchedule/ReadingSchedule";
 import CreateUsers from "./Pages/CreateUsers/CreateUsers";
 import { UserType } from "./types/types";
 import Navbar from "./Components/Navbar/Navbar";
+import RequireAdminAuth from "./Components/Auth/RequireAdminAuth/RequireAdminAuth";
+import RequireADRStaffAuth from "./Components/Auth/RequireADRStaffAuth/RequireADRStaffAuth";
+import RequireSchoolStaffAuth from "./Components/Auth/RequireSchoolStaffAuth/RequireSchoolStaffAuth";
+import { AuthProvider, useAuth } from "./Components/Auth/AuthProvider";
+
+
+
 
 if (!getApps().length) {
   initializeApp(firebaseConfig as FirebaseOptions);
@@ -22,21 +29,39 @@ if (!getApps().length) {
 
 const App: React.FC = () => {
   const location = useLocation();
-  const currentUserType = UserType.ADRAdmin;
+  
   return (
     <div className="App">
       {location.pathname !== "/" && <Navbar />}
+      <AuthProvider>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/library" element={<Library />} />
-        <Route path="/schedule" element={<ReadingSchedule />} />
+        <Route path="/library" 
+          element={
+          <RequireAdminAuth>
+            <Library />
+          </RequireAdminAuth>
+          }
+        />
+        
+        <Route path="/schedule" 
+          element={
+          <RequireSchoolStaffAuth>
+            <ReadingSchedule />
+          </RequireSchoolStaffAuth>
+          } 
+        />
+        
         <Route path="/home" element={<Home />} />
+
         <Route
           path="/createUsers"
-          element={<CreateUsers />}
+          element={<CreateUsers/>}
         />
       </Routes>
+      </AuthProvider>
+      
     </div>
   );
 };

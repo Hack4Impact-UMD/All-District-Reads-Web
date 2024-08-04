@@ -1,7 +1,7 @@
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { UserType } from "../types/types";
 
-export function createAdminUser(email: string): Promise<void> {
+export function createAdminUser(userId: string, email: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const functions = getFunctions();
     const createAdminCloudFunction = httpsCallable(
@@ -10,6 +10,7 @@ export function createAdminUser(email: string): Promise<void> {
     );
 
     createAdminCloudFunction({
+      userId: userId,
       email: email,
       name: "",
       schoolId: "",
@@ -27,7 +28,7 @@ export function createAdminUser(email: string): Promise<void> {
   });
 }
 
-export function createADRStaffUser(email: string): Promise<void> {
+export function createADRStaffUser(userId: string, email: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const functions = getFunctions();
     const createADRStaffCloudFunction = httpsCallable(
@@ -36,8 +37,10 @@ export function createADRStaffUser(email: string): Promise<void> {
     );
 
     createADRStaffCloudFunction({
+      userId: userId,
       email: email,
       name: "test",
+      schoolId: "",
       numChildren: "",
       schoolDistrictId: "",
       userType: "ADRStaff",
@@ -52,15 +55,16 @@ export function createADRStaffUser(email: string): Promise<void> {
   });
 }
 
-export function createSchoolStaffUser(email: string): Promise<void> {
+export function createSchoolStaffUser(userId: string, email: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const functions = getFunctions();
-    const createADRStaffCloudFunction = httpsCallable(
+    const createSchoolStaffCloudFunction = httpsCallable(
       functions,
       "createSchoolStaffUser",
     );
 
-    createADRStaffCloudFunction({
+    createSchoolStaffCloudFunction({
+      userId: userId,
       email: email,
       name: "test",
       numChildren: "",

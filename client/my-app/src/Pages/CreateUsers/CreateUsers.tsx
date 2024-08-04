@@ -1,7 +1,7 @@
 // CreateUsers.tsx
 import { UserType, canCreateUserType } from "../../types/types";
 import "./CreateUsers.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -31,12 +31,27 @@ try {
   firebaseApp = getApp(); // If the app is already initialized, get the existing app
 }
 
-const CreateUsers: React.FC = () => {
+const CreateUsers: React.FC = () =>{
   const authContext = useAuth();
+  const [currentUserType, setCurrentUserType] = useState<UserType | null>(null);
+  const [availableUserTypes, setAvailableUserTypes] = useState<UserType[]|undefined>();
+  
+  useEffect(() => {
+    if (!authContext.loading) {
+      const role = authContext.token?.claims.role as UserType;
+      setCurrentUserType(role);
+    }
+  }, [authContext.loading, authContext.token?.claims.role]);
 
-  const getAvailableUserTypes = () => {
-    console.log(authContext);
-    switch (authContext.userType) {
+  useEffect(() => {
+    if (currentUserType) {
+      const types = getAvailableUserTypes(currentUserType);
+      setAvailableUserTypes(types);
+    }
+  }, [currentUserType]);
+
+  const getAvailableUserTypes = (role: UserType): UserType[] => {
+    switch (role) {
       case UserType.ADRAdmin:
         return [UserType.ADRAdmin, UserType.ADRStaff, UserType.SchoolStaff];
       case UserType.ADRStaff:
@@ -44,11 +59,9 @@ const CreateUsers: React.FC = () => {
       default:
         return []; // Empty array if no creation rights
     }
-  };
-
-  const [availableUserTypes, setAvailableUserTypes] = useState<UserType[]>(
-    getAvailableUserTypes(),
-  );
+  }; // Empty array if no creation rights
+   
+  
   const [newUserType, setNewUserType] = useState<UserType>();
   const [message, setMessage] = useState("");
   const [registrationEmail, setRegistrationEmail] = useState("");
@@ -59,6 +72,8 @@ const CreateUsers: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<"home" | "wrong" | null>(null); // State to track current page
   const navigate = useNavigate();
 
+  
+
   const handleRegister = async () => {
     const auth = getAuth(firebaseApp);
 
@@ -68,16 +83,19 @@ const CreateUsers: React.FC = () => {
         registrationEmail,
         registrationPassword,
       );
+
+      const userId = userCredential.user.uid;
+
       if (newUserType == UserType.ADRAdmin) {
-        await createAdminUser(registrationEmail);
+        await createAdminUser(userId, registrationEmail);
       }
 
       if (newUserType == UserType.ADRStaff) {
-        await createADRStaffUser(registrationEmail);
+        await createADRStaffUser(userId, registrationEmail);
       }
 
       if (newUserType == UserType.SchoolStaff) {
-        await createSchoolStaffUser(registrationEmail);
+        await createSchoolStaffUser(userId, registrationEmail);
       }
       console.log("Registration successful:", userCredential.user);
       setRegistrationButtonClicked(true); // Set registrationButtonClicked to true when registration button is clicked
@@ -114,7 +132,7 @@ const CreateUsers: React.FC = () => {
         <div className="heading-text">Select new user type</div>
 
         <div className="userOptions">
-          {availableUserTypes.map((type) => (
+          {availableUserTypes?.map((type) => (
             <label key={type} className="userOption">
               <input
                 type="radio"
